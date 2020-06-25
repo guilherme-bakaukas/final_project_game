@@ -3,15 +3,32 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Unicamp extends JLabel {
+public class Unicamp extends JLabel implements IPeca {
 	private static final long serialVersionUID = -9047898149398844451L;
 	
-	private Tabuleiro tabuleiro;
+	private Tabuleiro tab;
+	private IPeca[][] tabuleiro;
 	private int linha,coluna;
+	private char name;
+	private boolean moved;
 	
 	public Unicamp(String image) {
 		super(new ImageIcon(image));
 		setSize(10,10);
+		this.name='u';
+		this.moved=false;
+	}
+	
+	public char getname() {
+		return this.name;
+	}
+	
+	public boolean getmoved() {
+		return moved;
+	}
+	
+	public void setmoved(boolean b) {
+		this.moved=b;	
 	}
 	
 	public int[] random_positions() {
@@ -27,32 +44,43 @@ public class Unicamp extends JLabel {
 	}
 	
 	public boolean verifica_movimento(int[] vetor) {//verifica se as posições se encaixam com o tabuleiro
-		if ((vetor[0])>tabuleiro.linha || (vetor[0])<1) {
+		if ((vetor[0])>=tab.linha || (vetor[0])<0) {
 			return false;
 		}
-		if ((vetor[1])>tabuleiro.coluna || (vetor[1]<1)) {
+		if ((vetor[1])>=tab.coluna || (vetor[1]<0)) {
 			return false;
 		}
 		return true;
 	}
 	
-	public int movimenta() {//retorna o vetor de posições {linha,coluna} para movimentação
+	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
+		
 		int[] vetor= random_positions();
 		while(verifica_movimento(vetor)==false) {
 			vetor=random_positions();
 		}
+		
+		tabuleiro[linha][coluna]=null;
+		
 		this.linha=vetor[0];
 		this.coluna=vetor[1];
 		
+		System.out.println("TABULEIRO unicamp_linha: "+linha+" unicamp coluna: "+ coluna);
 		
-		int num=(vetor[0]-1)*tabuleiro.linha + vetor[1];// da a posição para ajudar no for da construção do tabuleiro
-		return (num);
+		tabuleiro[linha][coluna]=this;
+		
+		this.moved=true;//indica que a peça já realizou seu movimento
+		
+		return tabuleiro;
+		
 	}
 	
-	public void vinculate_tabuleiro(Tabuleiro tabuleiro){
-		this.tabuleiro=tabuleiro;
-		this.linha=1;//inicia na primeira posição do tabuleiro (podemos mudar)
-		this.coluna=1;
+	public void vinculate_tabuleiro(Tabuleiro tab){
+		this.tab=tab;
+		this.tabuleiro=tab.tabuleiro;
+		this.linha=0;//inicia na primeira posição do tabuleiro (podemos mudar)
+		this.coluna=0;
 	}
+
 	
 }

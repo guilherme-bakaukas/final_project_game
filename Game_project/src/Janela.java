@@ -48,13 +48,9 @@ public class Janela extends JFrame{
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 	
-	public void recreate_cenario(int linha, int coluna) {
-		//tabuleiro.atualizar(linha,coluna);
-		//ideia é recriar o cenário porém com o objeto animado deslocado
-	}
 	
 	public void start() {
-		tabuleiro.start();
+		tabuleiro.start();//inicia o timer e as movimentações automáticas
 	}
 	
 	public void atualizar() {

@@ -13,9 +13,12 @@ public class Tabuleiro {
 	private String ambiente;
 	private Unicamp unicamp;
 	private Usuario usuario;
+	
 	public JPanel imagePane;
 	private Janela janela;
+	
 	public int coluna,linha;
+	public IPeca[][] tabuleiro;
 	
 
 	public Tabuleiro(Janela janela, int linha, int coluna) {//cria o layout com seu tamanho
@@ -27,6 +30,8 @@ public class Tabuleiro {
 		imagePane= new JPanel();// painel das imagens
         imagePane.setLayout(new GridLayout(linha,coluna));
         
+        this.tabuleiro=new IPeca[linha][coluna];
+        
 	}
 	
 	public void create_tabuleiro(String ambiente, Unicamp unicamp, Usuario usuario) {//tabuleiro em seu estado inicial
@@ -35,17 +40,23 @@ public class Tabuleiro {
 		this.usuario=usuario;
 		this.unicamp=unicamp;
 		
-		vinculate_components();//vincula o tabuleiro aos seus componentes
+		this.vinculate_components();//vincula o tabuleiro aos seus componentes
 		
-		imagePane.add(unicamp);
-		
-		for (int i=1;i<(linha*coluna-1);i++) {
-		    ImageIcon imagem = new ImageIcon(ambiente);
-		    JLabel campoImagem = new JLabel(imagem);
-			imagePane.add(campoImagem);
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (l==0 & c==0) {
+					tabuleiro[l][c]= unicamp;
+				}
+				else if (l==this.linha-1 & c==this.coluna-1) {
+					tabuleiro[l][c]= usuario;
+				}
+				else {
+					tabuleiro[l][c]=null;
+				}
 			}
+		}
 		
-		imagePane.add(usuario);
+		this.layout_tabuleiro();
 	}
 	
 	private void vinculate_components() {
@@ -53,15 +64,16 @@ public class Tabuleiro {
 		usuario.vinculate_tabuleiro(this);
 	}
 	
-	private Timer timer=new Timer();
+	private Timer timer=new Timer();//define uma movimentação periódica das peças automáticas do tabuleiro
 	private long segundos=1000;
 		
 	private TimerTask tarefa = new TimerTask() {
 
 	@Override
 	public void run() {
-		movimentar_pecas();
-		janela.atualizar();
+		movimentar_pecas();//movimenta as peças automáticamente
+		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
+		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
 	}		
 	};
 		
@@ -71,30 +83,44 @@ public class Tabuleiro {
 	}
 	
 	private void movimentar_pecas() {
+		//método que percorre o tabuleiro e movimenta as peças
 		
-		imagePane.removeAll();
-		
-		int pos_unicamp = unicamp.movimenta();
-		
-		for (int i=1;i<pos_unicamp;i++) {
-			ImageIcon imagem = new ImageIcon(ambiente);
-		    JLabel campoImagem = new JLabel(imagem);
-			imagePane.add(campoImagem);
-		}
-	    
-		imagePane.add(unicamp);
-		
-		for (int i=pos_unicamp+1;i<(linha*coluna);i++) {
-			ImageIcon imagem = new ImageIcon(ambiente);
-		    JLabel campoImagem = new JLabel(imagem);
-			imagePane.add(campoImagem);
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]!=null) {
+					if (tabuleiro[l][c].getname()=='u' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada
+						tabuleiro = tabuleiro[l][c].move();
+					}
+				}
+			}
 		}
 		
-		imagePane.add(usuario);
 		
 	}
 	
-	public void atualizar(int linha, int coluna) {
+	private void layout_tabuleiro() {
+		
+		imagePane.removeAll();
+		
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]==null) {
+				    ImageIcon imagem = new ImageIcon(ambiente);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+				}
+				else if (tabuleiro[l][c].getname()=='u') {
+					imagePane.add(unicamp);
+					tabuleiro[l][c].setmoved(false);//reseta o getmoved (para poder movê-lo na próxima rodada)
+					
+				}
+				else if (tabuleiro[l][c].getname()=='j') {
+					imagePane.add(usuario);
+					tabuleiro[l][c].setmoved(false);
+				}
+			}
+		}
 		
 	}
+	
 }

@@ -21,10 +21,9 @@ public class App_game {
     	JButton down=new JButton("down");
     	janela.setButton(down);
     	
-		Usuario jogador= new Usuario(DIRETORIO+"usuario.jpg");//adiciona a imagem animada no início
+		Usuario jogador= new Usuario(DIRETORIO+"Char.png");//adiciona a imagem animada no início
 		Unicamp unicamp= new Unicamp(DIRETORIO+"unicamp.jpg");
 		
-		jogador.vinculateJanela(janela);
 		jogador.vinculateButtons(up, right, left, down);
 		
 		right.addActionListener(jogador);
@@ -32,9 +31,10 @@ public class App_game {
 		up.addActionListener(jogador);
 		down.addActionListener(jogador);
 			
-		janela.setAmbiente(DIRETORIO+"ambiente.jpg", unicamp,jogador);//cria o ambiente inicial
+		janela.setAmbiente(DIRETORIO+"Frame1.jpg", unicamp,jogador);//cria o ambiente inicial
 		
 		janela.start();
+		
 		
 		
     	
