@@ -76,7 +76,6 @@ public class Unicamp extends Peca implements IPeca {
 	}
 
 	private void create_atividade() {
-		System.out.println("entrou");
 		boolean verificadora=true;
 		int [] vetor = random_positions(linha,coluna);
 		while(verificadora) {
@@ -88,10 +87,14 @@ public class Unicamp extends Peca implements IPeca {
 			}
 		}
 		
+		int incremento_linha=vetor[0]-this.linha;
+		int incremento_coluna=vetor[1]-this.coluna;
+		
 		if (tabuleiro[vetor[0]][vetor[1]]==null) {
-			tabuleiro[vetor[0]][vetor[1]]=new Atividade(vetor[0],vetor[1]);
+			tabuleiro[vetor[0]][vetor[1]]=new Atividade(vetor[0],vetor[1],incremento_linha,incremento_coluna);
 			tabuleiro[vetor[0]][vetor[1]].vinculate_tabuleiro(tab);
 		}
+
 	}
 
 	

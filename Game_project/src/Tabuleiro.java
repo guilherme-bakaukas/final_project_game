@@ -97,7 +97,7 @@ public class Tabuleiro {
 						tabuleiro=tabuleiro[l][c].move();
 					}
 					else if (tabuleiro[l][c].getname()=='a' & tabuleiro[l][c].getmoved()==false) {
-						//tabuleiro=tabuleiro[l][c].move();
+						tabuleiro=tabuleiro[l][c].move();
 					}
 				}
 			}
