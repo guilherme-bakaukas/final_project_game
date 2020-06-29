@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Usuario extends JLabel implements ActionListener,IPeca {
+public class Usuario extends Peca implements ActionListener,IPeca {
 	private static final long serialVersionUID = -8007636677009859732L;
 	
 	private JButton up,right,left,down;
@@ -39,9 +39,7 @@ public class Usuario extends JLabel implements ActionListener,IPeca {
 		}
 	}
 	
-	public Usuario(String image) {
-		super(new ImageIcon(image));
-		setSize(10,10);
+	public Usuario() {
 		this.name='j';
 		this.moved=false;
 	}

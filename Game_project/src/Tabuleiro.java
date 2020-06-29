@@ -11,14 +11,17 @@ public class Tabuleiro {
 	private static final long serialVersionUID = -6380363143384619115L;
 	
 	private String ambiente;
-	private Unicamp unicamp;
-	private Usuario usuario;
+	private String unicamp;
+	private String usuario;
+	private String corona;
+	private String atividade;
 	
 	public JPanel imagePane;
 	private Janela janela;
 	
 	public int coluna,linha;
 	public IPeca[][] tabuleiro;
+
 	
 
 	public Tabuleiro(Janela janela, int linha, int coluna) {//cria o layout com seu tamanho
@@ -34,21 +37,24 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, Unicamp unicamp, Usuario usuario) {//tabuleiro em seu estado inicial
+	public void create_tabuleiro(String ambiente, String unicamp, String usuario,String corona, String atividade) {//tabuleiro em seu estado inicial
 		
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
 		this.unicamp=unicamp;
+		this.corona=corona;
+		this.atividade=atividade;
 		
-		this.vinculate_components();//vincula o tabuleiro aos seus componentes
 		
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (l==0 & c==0) {
-					tabuleiro[l][c]= unicamp;
+					tabuleiro[l][c]= new Unicamp(atividade);//passamos a referencia da imagem da atividade para a criação da atividade
+					tabuleiro[l][c].vinculate_tabuleiro(this);//
 				}
 				else if (l==this.linha-1 & c==this.coluna-1) {
-					tabuleiro[l][c]= usuario;
+					tabuleiro[l][c]= new Usuario();
+					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else {
 					tabuleiro[l][c]=null;
@@ -59,10 +65,6 @@ public class Tabuleiro {
 		this.layout_tabuleiro();
 	}
 	
-	private void vinculate_components() {
-		unicamp.vinculate_tabuleiro(this);
-		usuario.vinculate_tabuleiro(this);
-	}
 	
 	private Timer timer=new Timer();//define uma movimentação periódica das peças automáticas do tabuleiro
 	private long segundos=1000;
@@ -91,6 +93,12 @@ public class Tabuleiro {
 					if (tabuleiro[l][c].getname()=='u' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada
 						tabuleiro = tabuleiro[l][c].move();
 					}
+					else if (tabuleiro[l][c].getname()=='c' & tabuleiro[l][c].getmoved()==false) {
+						tabuleiro=tabuleiro[l][c].move();
+					}
+					else if (tabuleiro[l][c].getname()=='a' & tabuleiro[l][c].getmoved()==false) {
+						//tabuleiro=tabuleiro[l][c].move();
+					}
 				}
 			}
 		}
@@ -110,12 +118,28 @@ public class Tabuleiro {
 					imagePane.add(campoImagem);
 				}
 				else if (tabuleiro[l][c].getname()=='u') {
-					imagePane.add(unicamp);
+				    ImageIcon imagem = new ImageIcon(unicamp);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
 					tabuleiro[l][c].setmoved(false);//reseta o getmoved (para poder movê-lo na próxima rodada)
 					
 				}
 				else if (tabuleiro[l][c].getname()=='j') {
-					imagePane.add(usuario);
+				    ImageIcon imagem = new ImageIcon(usuario);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+					tabuleiro[l][c].setmoved(false);
+				}
+				else if (tabuleiro[l][c].getname()=='c') {
+				    ImageIcon imagem = new ImageIcon(corona);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+					tabuleiro[l][c].setmoved(false);
+				}
+				else if (tabuleiro[l][c].getname()=='a') {
+				    ImageIcon imagem = new ImageIcon(atividade);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
 					tabuleiro[l][c].setmoved(false);
 				}
 			}

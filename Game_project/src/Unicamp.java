@@ -3,7 +3,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Unicamp extends JLabel implements IPeca {
+public class Unicamp extends Peca implements IPeca {
 	private static final long serialVersionUID = -9047898149398844451L;
 	
 	private Tabuleiro tab;
@@ -11,12 +11,12 @@ public class Unicamp extends JLabel implements IPeca {
 	private int linha,coluna;
 	private char name;
 	private boolean moved;
+	private String atividade;
 	
-	public Unicamp(String image) {
-		super(new ImageIcon(image));
-		setSize(10,10);
+	public Unicamp(String atividade) {
 		this.name='u';
 		this.moved=false;
+		this.atividade=atividade;
 	}
 	
 	public char getname() {
@@ -31,23 +31,9 @@ public class Unicamp extends JLabel implements IPeca {
 		this.moved=b;	
 	}
 	
-	public int[] random_positions() {
-		int random_linha=0;
-		int random_coluna=0;
-	
-		while(random_linha==0 & random_coluna==0 ) {//para não ficar parado
-			random_linha=new Random().nextInt(2 + 1)-1;//gera valores de -1 até 1, para indicar o movimento da unicamp
-			random_coluna=new Random().nextInt(2 + 1)-1;	
-		}
-		int vetor[]= {(linha+random_linha),(coluna+random_coluna)};
-		return vetor;
-	}
-	
-	public boolean verifica_movimento(int[] vetor) {//verifica se as posições se encaixam com o tabuleiro
-		if ((vetor[0])>=tab.linha || (vetor[0])<0) {
-			return false;
-		}
-		if ((vetor[1])>=tab.coluna || (vetor[1]<0)) {
+	public boolean verifica_movimento(int[] vetor) {
+		if (super.verifica_movimento(vetor,tab)==false) return false; //verifica se está nos limites do tabuleiro
+		else if (tabuleiro[vetor[0]][vetor[1]]!=null) {//verifica se o espaço está vazio para ir
 			return false;
 		}
 		return true;
@@ -55,9 +41,9 @@ public class Unicamp extends JLabel implements IPeca {
 	
 	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
 		
-		int[] vetor= random_positions();
+		int[] vetor= random_positions(linha,coluna);
 		while(verifica_movimento(vetor)==false) {
-			vetor=random_positions();
+			vetor=random_positions(linha,coluna);
 		}
 		
 		tabuleiro[linha][coluna]=null;
@@ -65,11 +51,11 @@ public class Unicamp extends JLabel implements IPeca {
 		this.linha=vetor[0];
 		this.coluna=vetor[1];
 		
-		System.out.println("TABULEIRO unicamp_linha: "+linha+" unicamp coluna: "+ coluna);
-		
 		tabuleiro[linha][coluna]=this;
 		
 		this.moved=true;//indica que a peça já realizou seu movimento
+		
+		this.verifica_atividade();//analisa se haverá uma atividade a ser criada
 		
 		return tabuleiro;
 		
@@ -80,6 +66,32 @@ public class Unicamp extends JLabel implements IPeca {
 		this.tabuleiro=tab.tabuleiro;
 		this.linha=0;//inicia na primeira posição do tabuleiro (podemos mudar)
 		this.coluna=0;
+	}
+	
+	private void verifica_atividade() {
+		int num=new Random().nextInt(100 + 1);
+		if (num<=30) {//chance de 20% de criar corona
+			this.create_atividade();
+		}	
+	}
+
+	private void create_atividade() {
+		System.out.println("entrou");
+		boolean verificadora=true;
+		int [] vetor = random_positions(linha,coluna);
+		while(verificadora) {
+			if ((vetor[0])<tab.linha & (vetor[0])>=0 & (vetor[1])<tab.coluna & (vetor[1]>=0)){
+				verificadora=false;
+			}
+			else {
+				vetor=random_positions(linha,coluna);
+			}
+		}
+		
+		if (tabuleiro[vetor[0]][vetor[1]]==null) {
+			tabuleiro[vetor[0]][vetor[1]]=new Atividade(vetor[0],vetor[1]);
+			tabuleiro[vetor[0]][vetor[1]].vinculate_tabuleiro(tab);
+		}
 	}
 
 	

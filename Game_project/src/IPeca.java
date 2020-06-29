@@ -8,4 +8,6 @@ public interface IPeca {//interface criada para organizar as peças e suas locali
 	public IPeca[][] move();//movimentaçõ da peça
 	
 	public void setmoved(boolean b);//definir seu status de movimentação
+
+	public void vinculate_tabuleiro(Tabuleiro tab);
 }
