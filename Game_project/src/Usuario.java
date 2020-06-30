@@ -9,39 +9,61 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	private static final long serialVersionUID = -8007636677009859732L;
 	
 	private JButton up,right,left,down;
-	private int linha,coluna;//define a posição da imagem inicia no zero
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
 	private char name;
 	private boolean moved;
 	
 	public void actionPerformed(ActionEvent event) {
+		
+		int[] vetor= {linha,coluna};
+		
 		if (event.getSource()==right) {
-			if (this.coluna<tab.coluna-1) {//testa os limites do tabuleiro
-				//verificar movimento
+			vetor[1]++;
+			if (super.verifica_movimento(vetor,tab)==true) {
+				tabuleiro[linha][coluna]=null;
+				this.coluna++;
+				tabuleiro=this.move();
 			}
 		}
-		if (event.getSource()==left) {
-			if (this.coluna>0) {
-				//verificar movimento
+		else if (event.getSource()==left) {
+			vetor[1]--;
+			if (super.verifica_movimento(vetor,tab)==true) {
+				tabuleiro[linha][coluna]=null;
+				this.coluna--;
+				tabuleiro=this.move();
 			}
 		}
-		if (event.getSource()==up) {
-			if (this.linha>0) {
-				//verificar movimento
-			}
-		}
-		if (event.getSource()==down) {
-			if (this.linha<tab.linha-1) {
-				//verificar movimento
-			}
+		else if (event.getSource()==up) {
 			
+			vetor[0]--;
+			
+			if (super.verifica_movimento(vetor,tab)==true) {
+				tabuleiro[linha][coluna]=null;
+				this.linha--;
+				tabuleiro=this.move();
+			}
 		}
+		else if (event.getSource()==down) {
+			vetor[0]++;
+			if (super.verifica_movimento(vetor,tab)==true) {
+				tabuleiro[linha][coluna]=null;
+				this.linha++;
+				tabuleiro=this.move();
+			}
+		}
+		
+		//FALTA VERIFICAR COLISÕES
+		
+		tab.layout_tabuleiro();
+		tab.atualizar_tabuleiro();
+		
 	}
 	
-	public Usuario() {
+	public Usuario(String image) {
 		this.name='j';
 		this.moved=false;
+		this.image=image;
 	}
 
 	public void vinculateButtons(JButton up,JButton right,JButton left,JButton down) {
@@ -54,8 +76,8 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	public void vinculate_tabuleiro(Tabuleiro tab) {
 		this.tab=tab;
 		this.tabuleiro=tab.tabuleiro;
-		this.linha=tab.linha-1;//sua localização inicial é a ultima do tabuleiro
-		this.coluna=tab.coluna-1;
+		this.linha=(tab.linha)-1;//sua localização inicial é a ultima do tabuleiro
+		this.coluna=(tab.coluna)-1;
 	}
 
 	public char getname() {
@@ -63,8 +85,8 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	}
 
 	public IPeca[][] move() {
-		// movimentar o jogador
-		return null;
+		tabuleiro[linha][coluna]=this;
+		return tabuleiro;
 	}
 	
 	public boolean getmoved() {

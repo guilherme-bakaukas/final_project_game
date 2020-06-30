@@ -8,15 +8,15 @@ public class Unicamp extends Peca implements IPeca {
 	
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
-	private int linha,coluna;
 	private char name;
 	private boolean moved;
 	private String atividade;
 	
-	public Unicamp(String atividade) {
+	public Unicamp(String image, String atividade) {
 		this.name='u';
 		this.moved=false;
 		this.atividade=atividade;
+		this.image=image;
 	}
 	
 	public char getname() {
@@ -41,9 +41,9 @@ public class Unicamp extends Peca implements IPeca {
 	
 	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
 		
-		int[] vetor= random_positions(linha,coluna);
+		int[] vetor= random_positions();
 		while(verifica_movimento(vetor)==false) {
-			vetor=random_positions(linha,coluna);
+			vetor=random_positions();
 		}
 		
 		tabuleiro[linha][coluna]=null;
@@ -77,13 +77,13 @@ public class Unicamp extends Peca implements IPeca {
 
 	private void create_atividade() {
 		boolean verificadora=true;
-		int [] vetor = random_positions(linha,coluna);
+		int [] vetor = random_positions();
 		while(verificadora) {
 			if ((vetor[0])<tab.linha & (vetor[0])>=0 & (vetor[1])<tab.coluna & (vetor[1]>=0)){
 				verificadora=false;
 			}
 			else {
-				vetor=random_positions(linha,coluna);
+				vetor=random_positions();
 			}
 		}
 		
@@ -91,7 +91,7 @@ public class Unicamp extends Peca implements IPeca {
 		int incremento_coluna=vetor[1]-this.coluna;
 		
 		if (tabuleiro[vetor[0]][vetor[1]]==null) {
-			tabuleiro[vetor[0]][vetor[1]]=new Atividade(vetor[0],vetor[1],incremento_linha,incremento_coluna);
+			tabuleiro[vetor[0]][vetor[1]]=new Atividade(atividade,vetor[0],vetor[1],incremento_linha,incremento_coluna);
 			tabuleiro[vetor[0]][vetor[1]].vinculate_tabuleiro(tab);
 		}
 

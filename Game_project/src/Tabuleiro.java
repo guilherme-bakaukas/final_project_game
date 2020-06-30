@@ -12,7 +12,7 @@ public class Tabuleiro {
 	
 	private String ambiente;
 	private String unicamp;
-	private String usuario;
+	private Usuario usuario;
 	private String corona;
 	private String atividade;
 	
@@ -37,7 +37,7 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, String usuario,String corona, String atividade) {//tabuleiro em seu estado inicial
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade) {//tabuleiro em seu estado inicial
 		
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
@@ -49,11 +49,11 @@ public class Tabuleiro {
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (l==0 & c==0) {
-					tabuleiro[l][c]= new Unicamp(atividade);//passamos a referencia da imagem da atividade para a criação da atividade
+					tabuleiro[l][c]= new Unicamp(unicamp,atividade);//passamos a referencia da imagem da atividade para a criação da atividade
 					tabuleiro[l][c].vinculate_tabuleiro(this);//
 				}
 				else if (l==this.linha-1 & c==this.coluna-1) {
-					tabuleiro[l][c]= new Usuario();
+					tabuleiro[l][c]= usuario;
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else {
@@ -106,7 +106,7 @@ public class Tabuleiro {
 		
 	}
 	
-	private void layout_tabuleiro() {
+	public void layout_tabuleiro() {
 		
 		imagePane.removeAll();
 		
@@ -125,7 +125,7 @@ public class Tabuleiro {
 					
 				}
 				else if (tabuleiro[l][c].getname()=='j') {
-				    ImageIcon imagem = new ImageIcon(usuario);
+				    ImageIcon imagem = new ImageIcon(usuario.image);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
 					tabuleiro[l][c].setmoved(false);
@@ -145,6 +145,9 @@ public class Tabuleiro {
 			}
 		}
 		
+	}
+	public void atualizar_tabuleiro() {
+		janela.atualizar();
 	}
 	
 }

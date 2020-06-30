@@ -5,8 +5,6 @@ public class Atividade extends Peca implements IPeca {
 
 	private char name;
 	private boolean moved;
-	private int linha;
-	private int coluna;
 	private IPeca[][] tabuleiro;
 	private Tabuleiro tab;
 	private int incremento_linha;
@@ -31,13 +29,14 @@ public class Atividade extends Peca implements IPeca {
 		
 	}
 	
-	public Atividade(int linha,int coluna, int incremento_linha, int incremento_coluna) {
+	public Atividade(String image, int linha,int coluna, int incremento_linha, int incremento_coluna) {
 		this.name='a';
 		this.moved=true;
 		this.linha=linha;
 		this.coluna=coluna;
 		this.incremento_linha=incremento_linha;
 		this.incremento_coluna=incremento_coluna;
+		this.image=image;
 	}
 	
 	public void vinculate_tabuleiro(Tabuleiro tab) {
@@ -47,7 +46,6 @@ public class Atividade extends Peca implements IPeca {
 	
 	
 	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
-		
 		int[] vetor= {linha+incremento_linha,coluna+incremento_coluna};
 		if (super.verifica_movimento(vetor,tab)==true) {
 			

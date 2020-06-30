@@ -29,9 +29,10 @@ public class Corona extends Peca implements IPeca {
 		
 	}
 	
-	public Corona() {
+	public Corona(String image) {
 		this.name='c';
 		this.moved=true;
+		this.image=image;
 	}
 
 	@Override

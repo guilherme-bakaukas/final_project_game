@@ -2,7 +2,10 @@ import java.util.Random;
 
 public abstract class Peca implements IPeca {
 	
-	public int[] random_positions(int linha,int coluna) {
+	public int linha,coluna;
+	public String image;
+	
+	public int[] random_positions() {
 		int random_linha=0;
 		int random_coluna=0;
 	
