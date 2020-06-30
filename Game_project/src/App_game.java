@@ -1,10 +1,8 @@
-import java.util.Random;
-
 import javax.swing.JButton;
 
 public class App_game {
 	
-	public static String DIRETORIO= App_game.class.getResource(".").getPath();
+	public static String DIRETORIO= App_game.class.getResource(".").getPath() + "assets/";
 
 	public static void main(String[] args) {
 		Janela janela=new Janela();
@@ -21,7 +19,7 @@ public class App_game {
     	JButton down=new JButton("down");
     	janela.setButton(down);
     	
-		Usuario jogador= new Usuario(DIRETORIO+"Char.png");//adiciona a imagem animada no início
+		Usuario jogador= new Usuario(DIRETORIO+"Vitor.png");//adiciona a imagem animada no início
 		
 		jogador.vinculateButtons(up, right, left, down);
 		
@@ -30,7 +28,7 @@ public class App_game {
 		up.addActionListener(jogador);
 		down.addActionListener(jogador);
 			
-		janela.setAmbiente(DIRETORIO+"Frame1.jpg", DIRETORIO+"unicamp.jpg",jogador, DIRETORIO+"coronavirus.jpg", DIRETORIO+"atividade.png");
+		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png",jogador, DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png");
 		//cria o ambiente inicial
 		
 		janela.start();
