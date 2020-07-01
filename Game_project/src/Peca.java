@@ -4,6 +4,7 @@ public abstract class Peca implements IPeca {
 	
 	public int linha,coluna;
 	public String image;
+	public char name;
 	
 	public int[] random_positions() {
 		int random_linha=0;

@@ -8,7 +8,6 @@ public class Unicamp extends Peca implements IPeca {
 	
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
-	private char name;
 	private boolean moved;
 	private String atividade;
 	

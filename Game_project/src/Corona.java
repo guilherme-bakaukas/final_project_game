@@ -3,7 +3,6 @@ import javax.swing.JLabel;
 
 public class Corona extends Peca implements IPeca {
 
-	private char name;
 	private boolean moved;
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;

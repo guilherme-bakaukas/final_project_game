@@ -11,52 +11,54 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	private JButton up,right,left,down;
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
-	private char name;
 	private boolean moved;
 	
 	public void actionPerformed(ActionEvent event) {
 		
-		int[] vetor= {linha,coluna};
-		
-		if (event.getSource()==right) {
-			vetor[1]++;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.coluna++;
-				tabuleiro=this.move();
-			}
-		}
-		else if (event.getSource()==left) {
-			vetor[1]--;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.coluna--;
-				tabuleiro=this.move();
-			}
-		}
-		else if (event.getSource()==up) {
+		if (this.moved==false) {//verifica se poderá se mover ou se está sob efeito da atividade (2 rodadas)
+			int[] vetor= {linha,coluna};
 			
-			vetor[0]--;
+			if (event.getSource()==right) {
+				vetor[1]++;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.coluna++;
+					tabuleiro=this.move();
+				}
+			}
+			else if (event.getSource()==left) {
+				vetor[1]--;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.coluna--;
+					tabuleiro=this.move();
+				}
+			}
+			else if (event.getSource()==up) {
+				
+				vetor[0]--;
+				
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.linha--;
+					tabuleiro=this.move();
+				}
+			}
+			else if (event.getSource()==down) {
+				vetor[0]++;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.linha++;
+					tabuleiro=this.move();
+				}
+			}
 			
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.linha--;
-				tabuleiro=this.move();
-			}
+			//FALTA VERIFICAR COLISÕES
+			
+			tab.layout_tabuleiro();
+			tab.atualizar_tabuleiro();
 		}
-		else if (event.getSource()==down) {
-			vetor[0]++;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.linha++;
-				tabuleiro=this.move();
-			}
-		}
-		
-		//FALTA VERIFICAR COLISÕES
-		
-		tab.layout_tabuleiro();
-		tab.atualizar_tabuleiro();
+
 		
 	}
 	
@@ -96,6 +98,24 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 
 	public void setmoved(boolean b) {
 		this.moved=b;
+		
+	}
+	
+	private boolean verifica_movimento(int[] vetor) {
+		if (super.verifica_movimento(vetor, tab)==false) return false;
+		if (tabuleiro[vetor[0]][vetor[1]]!=null) {
+			switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
+			case 'a':
+				this.moved=true;
+				break;
+			case 'c':
+				//morrer
+				break;
+			case 'u':
+				return false;
+			}
+		}
+		return true;
 		
 	}
 

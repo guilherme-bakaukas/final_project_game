@@ -19,6 +19,7 @@ public class Tabuleiro {
 	public JPanel imagePane;
 	private Janela janela;
 	
+	private int rodadas;
 	public int coluna,linha;
 	public IPeca[][] tabuleiro;
 
@@ -55,6 +56,7 @@ public class Tabuleiro {
 				else if (l==this.linha-1 & c==this.coluna-1) {
 					tabuleiro[l][c]= usuario;
 					tabuleiro[l][c].vinculate_tabuleiro(this);
+					this.rodadas=0;//variável para contabilizar as rodadas em que o usuario está sem poder jogar
 				}
 				else {
 					tabuleiro[l][c]=null;
@@ -99,6 +101,17 @@ public class Tabuleiro {
 					else if (tabuleiro[l][c].getname()=='a' & tabuleiro[l][c].getmoved()==false) {
 						tabuleiro=tabuleiro[l][c].move();
 					}
+					else if (tabuleiro[l][c].getname()=='j') {//fazemos a verificação se poderá se mover
+						if (tabuleiro[l][c].getmoved()==true) {
+							if (rodadas<2) {//deve passar duas rodadas sem se mover
+								this.rodadas++;
+							}
+							else {
+								rodadas=0;
+								tabuleiro[l][c].setmoved(false);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -128,7 +141,6 @@ public class Tabuleiro {
 				    ImageIcon imagem = new ImageIcon(usuario.image);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 				else if (tabuleiro[l][c].getname()=='c') {
 				    ImageIcon imagem = new ImageIcon(corona);
