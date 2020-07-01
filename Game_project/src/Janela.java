@@ -14,9 +14,11 @@ import javax.swing.SwingUtilities;
 
 public class Janela extends JFrame{
 	private static final long serialVersionUID=7686762169698416749L;
-	private JPanel controlPane;
+	private JPanel controlPane1;
+	private JPanel controlPane2;
 	private Tabuleiro tabuleiro;
 	public Container principalPane;
+	private JPanel buttonPane;
 	
 	public Janela(){
         super();
@@ -30,18 +32,32 @@ public class Janela extends JFrame{
         tabuleiro= new Tabuleiro(this,10,10);// painel das imagens
         principalPane.add(tabuleiro.imagePane,BorderLayout.CENTER);
         
-        controlPane=new JPanel();//painel de controle
-        controlPane.setLayout(new FlowLayout());
-        principalPane.add(controlPane,BorderLayout.SOUTH);
+        buttonPane=new JPanel();//painel de controle
+        buttonPane.setLayout(new BorderLayout());
+        principalPane.add(buttonPane,BorderLayout.SOUTH);
+        
+        controlPane1=new JPanel();//painel de controle
+        controlPane1.setLayout(new FlowLayout());
+        buttonPane.add(controlPane1,BorderLayout.CENTER);
+        
+        controlPane2=new JPanel();//painel de controle
+        controlPane2.setLayout(new FlowLayout());
+        buttonPane.add(controlPane2,BorderLayout.SOUTH);
+        
+        
         
         setVisible(true);
 
     }
 
-    public void setButton(JButton botao) {// inserir botao no painel de controle
-    	controlPane.add(botao);
+    public void setButtonUp(JButton botao) {// inserir botao no painel de controle)
+    	controlPane1.add(botao);
     	SwingUtilities.updateComponentTreeUI(this);
 	}
+    public void setButton(JButton botao) {
+    	controlPane2.add(botao);
+    	SwingUtilities.updateComponentTreeUI(this);
+    }
 
 	public void setAmbiente(String arquivo, String unicamp, Usuario usuario, String corona, String atividade, String doente) {
 		tabuleiro.create_tabuleiro(arquivo, unicamp, usuario, corona, atividade,doente);
