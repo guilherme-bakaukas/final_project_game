@@ -27,8 +27,13 @@ public class Doente extends PecasGeradoras implements IPeca {
 	@Override
 	public IPeca[][] move() {
 		// TODO Auto-generated method stub
-		tabuleiro=super.move();
-		this.verifica_corona();
+		if(this.moved==false) {
+			tabuleiro=super.move();
+		}
+		else {
+			this.verifica_corona();//analisa se haverá uma atividade a ser criada
+		}
+		
 		return tabuleiro;
 		
 	}

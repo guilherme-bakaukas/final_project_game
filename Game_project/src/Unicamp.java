@@ -28,10 +28,13 @@ public class Unicamp extends PecasGeradoras implements IPeca {
 	}
 	
 	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
-		 
-		tabuleiro=super.move();
 		
-		this.verifica_atividade();//analisa se haverá uma atividade a ser criada
+		if(this.moved==false) {
+			tabuleiro=super.move();
+		}
+		else {
+			this.verifica_atividade();//analisa se haverá uma atividade a ser criada
+		}
 		
 		return tabuleiro;
 		

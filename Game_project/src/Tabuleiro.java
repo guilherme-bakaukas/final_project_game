@@ -23,6 +23,7 @@ public class Tabuleiro {
 	private int rodadas;
 	public int coluna,linha;
 	public IPeca[][] tabuleiro;
+	private boolean gerar;
 
 
 	
@@ -32,6 +33,7 @@ public class Tabuleiro {
 		this.janela=janela;
 		this.linha=linha;
 		this.coluna=coluna;
+		this.gerar=false;
 		
 		imagePane= new JPanel();// painel das imagens
         imagePane.setLayout(new GridLayout(linha,coluna));
@@ -82,7 +84,19 @@ public class Tabuleiro {
 
 	@Override
 	public void run() {
-		movimentar_pecas();//movimenta as peças automáticamente
+		
+		//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
+		
+		if (gerar==false) {
+			movimentar_pecas();//movimenta as peças automáticamente
+			gerar=true;
+		}
+		else if (gerar==true) {
+			gera_pecas();//verifica se haverá geração de peças
+			reorganizar_tabuleiro();//reseta o moved das peças
+			gerar=false;
+		}
+		
 		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
 		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
 	}		
@@ -90,7 +104,7 @@ public class Tabuleiro {
 		
 	
 	public void start() {//começa a rodar o timer e cosequentemente as peças se movimentam automaticamente
-		timer.schedule(tarefa, 2000, 2000);
+		timer.schedule(tarefa, 1000, 1000);
 	}
 	
 	private void movimentar_pecas() {
@@ -129,6 +143,33 @@ public class Tabuleiro {
 		
 	}
 	
+	private void gera_pecas() {
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]!=null) {
+					if (tabuleiro[l][c].getname()=='u') {
+						tabuleiro[l][c].move();//realiza a verificaçaõ de geração
+					}
+					if (tabuleiro[l][c].getname()=='d') {
+						tabuleiro[l][c].move();
+					}
+				}
+			}
+		}
+	}
+	
+	private void reorganizar_tabuleiro() {
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]!=null) {
+					if (tabuleiro[l][c].getname()!='j') {
+						tabuleiro[l][c].setmoved(false);
+					}
+				}
+			}
+		}
+	}
+	
 	public void layout_tabuleiro() {
 		
 		imagePane.removeAll();
@@ -144,7 +185,6 @@ public class Tabuleiro {
 				    ImageIcon imagem = new ImageIcon(unicamp);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);//reseta o getmoved (para poder movê-lo na próxima rodada)
 					
 				}
 				else if (tabuleiro[l][c].getname()=='j') {
@@ -156,19 +196,16 @@ public class Tabuleiro {
 				    ImageIcon imagem = new ImageIcon(corona);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 				else if (tabuleiro[l][c].getname()=='a') {
 				    ImageIcon imagem = new ImageIcon(atividade);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 				else if (tabuleiro[l][c].getname()=='d') {
 				    ImageIcon imagem = new ImageIcon(doente);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 			}
 		}
