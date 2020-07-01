@@ -43,8 +43,8 @@ public class Janela extends JFrame{
     	SwingUtilities.updateComponentTreeUI(this);
 	}
 
-	public void setAmbiente(String arquivo, String unicamp, Usuario usuario, String corona, String atividade) {
-		tabuleiro.create_tabuleiro(arquivo, unicamp, usuario, corona, atividade);
+	public void setAmbiente(String arquivo, String unicamp, Usuario usuario, String corona, String atividade, String doente) {
+		tabuleiro.create_tabuleiro(arquivo, unicamp, usuario, corona, atividade,doente);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 	

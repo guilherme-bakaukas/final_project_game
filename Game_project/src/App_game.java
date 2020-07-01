@@ -28,7 +28,7 @@ public class App_game {
 		up.addActionListener(jogador);
 		down.addActionListener(jogador);
 			
-		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png",jogador, DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png");
+		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png",jogador, DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png",DIRETORIO+"Doente.png");
 		//cria o ambiente inicial
 		
 		janela.start();

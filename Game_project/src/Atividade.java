@@ -3,7 +3,6 @@ import javax.swing.JLabel;
 
 public class Atividade extends Peca implements IPeca {
 
-	private char name;
 	private boolean moved;
 	private IPeca[][] tabuleiro;
 	private Tabuleiro tab;
@@ -59,7 +58,10 @@ public class Atividade extends Peca implements IPeca {
 				this.moved=true;//indica que a peça já realizou seu movimento
 			}
 			else {
-				//tratar das colisões
+				if (tabuleiro[vetor[0]][vetor[1]].getname()=='j') {//caso colida com o jogador
+					tabuleiro[vetor[0]][vetor[1]].setmoved(true);
+					tabuleiro[this.linha][this.coluna]=null;//atividade some
+				}
 			}
 			
 		}

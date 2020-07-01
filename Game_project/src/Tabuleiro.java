@@ -15,6 +15,7 @@ public class Tabuleiro {
 	private Usuario usuario;
 	private String corona;
 	private String atividade;
+	private String doente;
 	
 	public JPanel imagePane;
 	private Janela janela;
@@ -22,6 +23,7 @@ public class Tabuleiro {
 	private int rodadas;
 	public int coluna,linha;
 	public IPeca[][] tabuleiro;
+
 
 	
 
@@ -38,25 +40,30 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade) {//tabuleiro em seu estado inicial
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente) {//tabuleiro em seu estado inicial
 		
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
 		this.unicamp=unicamp;
 		this.corona=corona;
 		this.atividade=atividade;
+		this.doente=doente;
 		
 		
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (l==0 & c==0) {
 					tabuleiro[l][c]= new Unicamp(unicamp,atividade);//passamos a referencia da imagem da atividade para a criação da atividade
-					tabuleiro[l][c].vinculate_tabuleiro(this);//
+					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else if (l==this.linha-1 & c==this.coluna-1) {
 					tabuleiro[l][c]= usuario;
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 					this.rodadas=0;//variável para contabilizar as rodadas em que o usuario está sem poder jogar
+				}
+				else if (l==0 & c==this.coluna-1) {
+					tabuleiro[l][c]=new Doente(doente,corona);
+					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else {
 					tabuleiro[l][c]=null;
@@ -112,6 +119,9 @@ public class Tabuleiro {
 							}
 						}
 					}
+					else if (tabuleiro[l][c].getname()=='d' & tabuleiro[l][c].getmoved()==false) {
+						tabuleiro=tabuleiro[l][c].move();
+					}
 				}
 			}
 		}
@@ -150,6 +160,12 @@ public class Tabuleiro {
 				}
 				else if (tabuleiro[l][c].getname()=='a') {
 				    ImageIcon imagem = new ImageIcon(atividade);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+					tabuleiro[l][c].setmoved(false);
+				}
+				else if (tabuleiro[l][c].getname()=='d') {
+				    ImageIcon imagem = new ImageIcon(doente);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
 					tabuleiro[l][c].setmoved(false);

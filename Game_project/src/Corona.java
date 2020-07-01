@@ -6,6 +6,8 @@ public class Corona extends Peca implements IPeca {
 	private boolean moved;
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
+	private int incremento_linha;
+	private int incremento_coluna;
 
 	@Override
 	public char getname() {
@@ -28,9 +30,13 @@ public class Corona extends Peca implements IPeca {
 		
 	}
 	
-	public Corona(String image) {
+	public Corona(String image, int linha,int coluna, int incremento_linha, int incremento_coluna) {
 		this.name='c';
 		this.moved=true;
+		this.linha=linha;
+		this.coluna=coluna;
+		this.incremento_linha=incremento_linha;
+		this.incremento_coluna=incremento_coluna;
 		this.image=image;
 	}
 

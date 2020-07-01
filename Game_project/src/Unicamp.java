@@ -3,12 +3,9 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Unicamp extends Peca implements IPeca {
+public class Unicamp extends PecasGeradoras implements IPeca {
 	private static final long serialVersionUID = -9047898149398844451L;
 	
-	private Tabuleiro tab;
-	private IPeca[][] tabuleiro;
-	private boolean moved;
 	private String atividade;
 	
 	public Unicamp(String image, String atividade) {
@@ -30,29 +27,9 @@ public class Unicamp extends Peca implements IPeca {
 		this.moved=b;	
 	}
 	
-	public boolean verifica_movimento(int[] vetor) {
-		if (super.verifica_movimento(vetor,tab)==false) return false; //verifica se está nos limites do tabuleiro
-		else if (tabuleiro[vetor[0]][vetor[1]]!=null) {//verifica se o espaço está vazio para ir
-			return false;
-		}
-		return true;
-	}
-	
 	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
-		
-		int[] vetor= random_positions();
-		while(verifica_movimento(vetor)==false) {
-			vetor=random_positions();
-		}
-		
-		tabuleiro[linha][coluna]=null;
-		
-		this.linha=vetor[0];
-		this.coluna=vetor[1];
-		
-		tabuleiro[linha][coluna]=this;
-		
-		this.moved=true;//indica que a peça já realizou seu movimento
+		 
+		tabuleiro=super.move();
 		
 		this.verifica_atividade();//analisa se haverá uma atividade a ser criada
 		
