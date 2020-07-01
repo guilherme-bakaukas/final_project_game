@@ -109,9 +109,12 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				this.moved=true;
 				break;
 			case 'c':
-				//morrer
+				System.out.println("morreu");//mensagem de teste
+				//fazer morrer de fato
 				break;
 			case 'u':
+				return false;
+			case 'd':
 				return false;
 			}
 		}

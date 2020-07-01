@@ -1,9 +1,9 @@
 
 public abstract class PecasGeradoras extends Peca {
 	
-	public Tabuleiro tab;
-	public IPeca[][] tabuleiro;
-	public boolean moved;
+	protected Tabuleiro tab;
+	protected IPeca[][] tabuleiro;
+	protected boolean moved;
 	
 	public boolean verifica_movimento(int[] vetor) {
 		if (super.verifica_movimento(vetor,tab)==false) return false; //verifica se está nos limites do tabuleiro

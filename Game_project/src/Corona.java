@@ -1,13 +1,7 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Corona extends Peca implements IPeca {
-
-	private boolean moved;
-	private Tabuleiro tab;
-	private IPeca[][] tabuleiro;
-	private int incremento_linha;
-	private int incremento_coluna;
+public class Corona extends PecasGeradas implements IPeca {
 
 	@Override
 	public char getname() {
@@ -17,11 +11,6 @@ public class Corona extends Peca implements IPeca {
 	@Override
 	public boolean getmoved() {
 		return moved;
-	}
-
-	@Override
-	public IPeca[][] move() {
-		return null;
 	}
 
 	@Override
@@ -44,6 +33,13 @@ public class Corona extends Peca implements IPeca {
 	public void vinculate_tabuleiro(Tabuleiro tab) {
 		this.tab=tab;
 		this.tabuleiro=tab.tabuleiro;
+	}
+
+	@Override
+	public void colisao_jogador(int[] vetor) {
+		System.out.println("morreu");
+		//fazer morrer de fato
+		
 	}
 	
 	
