@@ -39,6 +39,7 @@ public class Corona extends PecasGeradas implements IPeca {
 	public void colisao_jogador(int[] vetor) {
 		System.out.println("morreu");
 		//fazer morrer de fato
+		tabuleiro[this.linha][this.coluna]=null;//peça some
 		
 	}
 	
