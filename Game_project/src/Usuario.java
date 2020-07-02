@@ -34,10 +34,8 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 					tabuleiro=this.move();
 				}
 			}
-			else if (event.getSource()==up) {
-				
+			else if (event.getSource()==up) {	
 				vetor[0]--;
-				
 				if (verifica_movimento(vetor)==true) {
 					tabuleiro[linha][coluna]=null;
 					this.linha--;
@@ -110,7 +108,7 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				break;
 			case 'c':
 				System.out.println("morreu");//mensagem de teste
-				//fazer morrer de fato
+				tab.die();
 				break;
 			case 'u':
 				return false;
@@ -121,7 +119,6 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 		return true;
 		
 	}
-
 
 
 }

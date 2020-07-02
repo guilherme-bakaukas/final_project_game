@@ -26,6 +26,9 @@ public abstract class PecasGeradas extends Peca {
 				if (tabuleiro[vetor[0]][vetor[1]].getname()=='j') {//caso colida com o jogador
 					colisao_jogador(vetor);
 				}
+				else {
+					tabuleiro[this.linha][this.coluna]=null;//caso colida com alguma coisa ele deve sumir
+				}
 			}
 			
 		}

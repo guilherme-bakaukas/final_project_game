@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class Doente extends PecasGeradoras implements IPeca {
 	
+	
 	private String corona;
 
 

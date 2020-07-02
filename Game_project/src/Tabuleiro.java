@@ -16,6 +16,7 @@ public class Tabuleiro {
 	private String corona;
 	private String atividade;
 	private String doente;
+	private String vacina;
 	
 	public JPanel imagePane;
 	private Janela janela;
@@ -42,7 +43,7 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente) {//tabuleiro em seu estado inicial
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina) {//tabuleiro em seu estado inicial
 		
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
@@ -50,6 +51,7 @@ public class Tabuleiro {
 		this.corona=corona;
 		this.atividade=atividade;
 		this.doente=doente;
+		this.vacina=vacina;
 		
 		
 		for (int l=0;l<this.linha;l++) {
@@ -77,33 +79,34 @@ public class Tabuleiro {
 	}
 	
 	
-	private Timer timer=new Timer();//define uma movimentação periódica das peças automáticas do tabuleiro
+	private Timer timer;
 	private long segundos=1000;
 		
-	private TimerTask tarefa = new TimerTask() {
-
-	@Override
-	public void run() {
-		
-		//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
-		
-		if (gerar==false) {
-			movimentar_pecas();//movimenta as peças automáticamente
-			gerar=true;
-		}
-		else if (gerar==true) {
-			gera_pecas();//verifica se haverá geração de peças
-			reorganizar_tabuleiro();//reseta o moved das peças
-			gerar=false;
-		}
-		
-		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
-		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
-	}		
-	};
-		
+	private TimerTask tarefa;
 	
 	public void start() {//começa a rodar o timer e cosequentemente as peças se movimentam automaticamente
+		timer=new Timer();
+		tarefa = new TimerTask() {
+
+			@Override
+			public void run() {
+				
+				//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
+				
+				if (gerar==false) {
+					movimentar_pecas();//movimenta as peças automáticamente
+					gerar=true;
+				}
+				else if (gerar==true) {
+					gera_pecas();//verifica se haverá geração de peças
+					reorganizar_tabuleiro();//reseta o moved das peças
+					gerar=false;
+				}
+				
+				layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
+				janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
+			}	
+			};
 		timer.schedule(tarefa, 1000, 1000);
 	}
 	
@@ -213,6 +216,11 @@ public class Tabuleiro {
 	}
 	public void atualizar_tabuleiro() {
 		janela.atualizar();
+	}
+	
+	public void die() {
+		timer.cancel();
+		janela.stop();
 	}
 	
 }
