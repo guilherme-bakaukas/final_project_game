@@ -3,7 +3,6 @@ import javax.swing.JLabel;
 
 public class Atividade extends PecasGeradas implements IPeca {
 
-
 	@Override
 	public char getname() {
 		// TODO Auto-generated method stub
@@ -16,11 +15,9 @@ public class Atividade extends PecasGeradas implements IPeca {
 		return this.moved;
 	}
 
-
 	@Override
 	public void setmoved(boolean b) {
 		this.moved = b;
-		
 	}
 	
 	public Atividade(String image, int linha,int coluna, int incremento_linha, int incremento_coluna) {
