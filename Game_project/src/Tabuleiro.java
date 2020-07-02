@@ -51,7 +51,7 @@ public class Tabuleiro {
 		this.corona=corona;
 		this.atividade=atividade;
 		this.doente=doente;
-		this.vacina=vacina;
+		this.vacina=vacina; 
 		
 		
 		for (int l=0;l<this.linha;l++) {

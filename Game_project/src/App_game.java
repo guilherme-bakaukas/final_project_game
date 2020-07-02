@@ -7,31 +7,11 @@ public class App_game {
 	public static void main(String[] args) {
 		Janela janela=new Janela();
 		
-    	JButton up=new JButton("up");
-    	janela.setButtonUp(up);
-    	
-    	JButton left=new JButton("left");
-    	janela.setButton(left);
+		janela.painel_inicial(DIRETORIO+"Gui.png",DIRETORIO+"Vitor.png");
 		
-    	JButton down=new JButton("down");
-    	janela.setButton(down);
-    	
-    	JButton right=new JButton("right");
-    	janela.setButton(right);
-    	
-    	
-    	
-		Usuario jogador= new Usuario(DIRETORIO+"Vitor.png");//adiciona a imagem animada no início
+		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png", DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png",DIRETORIO+"Doente.png", DIRETORIO+"Vacina.png",DIRETORIO+"caixao_meme.gif");
+		//vincula as imagens à janela
 		
-		jogador.vinculateButtons(up, right, left, down);
-		
-		right.addActionListener(jogador);
-		left.addActionListener(jogador);
-		up.addActionListener(jogador);
-		down.addActionListener(jogador);
-			
-		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png",jogador, DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png",DIRETORIO+"Doente.png", DIRETORIO+"Vacina.png",DIRETORIO+"meme_do_caixao.jpg");
-		//cria o ambiente inicial
 		
 		janela.start();
 		
