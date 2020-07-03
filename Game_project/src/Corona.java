@@ -1,7 +1,5 @@
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-public class Corona extends PecasGeradas implements IPeca {
+public class Corona extends PecasGeradas {
 
 	@Override
 	public char getname() {
@@ -37,9 +35,8 @@ public class Corona extends PecasGeradas implements IPeca {
 
 	@Override
 	public void colisao_jogador(int[] vetor) {
-		System.out.println("morreu");
 		tabuleiro[this.linha][this.coluna]=null;//peça some
-		tab.die();
+		tab.die();//usuario morre
 	}
 	
 	

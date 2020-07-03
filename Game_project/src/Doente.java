@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Doente extends PecasGeradoras implements IPeca {
+public class Doente extends PecasGeradoras {
 	
 	
 	private String corona;
@@ -26,39 +26,28 @@ public class Doente extends PecasGeradoras implements IPeca {
 	}
 
 	@Override
-	public IPeca[][] move() {
+	public void move() {
 		// TODO Auto-generated method stub
 		if(this.moved==false) {
-			tabuleiro=super.move();
+			super.move();
 		}
-		else {
-			this.verifica_corona();//analisa se haverá uma atividade a ser criada
+		else {//caso ja tenha movido ele deve verificar a geração de corona
+			this.verifica_corona();
 		}
 		
-		return tabuleiro;
 		
 	}
 
 	private void verifica_corona() {
 		int num=new Random().nextInt(100 + 1);
-		if (num<=30) {//chance de 20% de criar corona
+		if (num<=30) {//chance de 30% de criar corona
 			this.create_corona();
 		}
 		
 	}
 
 	private void create_corona() {
-		
-		boolean verificadora=true;
-		int [] vetor = random_positions();
-		while(verificadora) {
-			if ((vetor[0])<tab.linha & (vetor[0])>=0 & (vetor[1])<tab.coluna & (vetor[1]>=0)){
-				verificadora=false;
-			}
-			else {
-				vetor=random_positions();
-			}
-		}
+		int[] vetor=create_position();
 		
 		int incremento_linha=vetor[0]-this.linha;
 		int incremento_coluna=vetor[1]-this.coluna;

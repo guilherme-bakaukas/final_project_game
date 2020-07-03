@@ -1,4 +1,3 @@
-import javax.swing.JButton;
 
 public class App_game {
 	
@@ -11,9 +10,6 @@ public class App_game {
 		
 		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png", DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png",DIRETORIO+"Doente.png", DIRETORIO+"Vacina.png",DIRETORIO+"caixao_meme.gif");
 		//vincula as imagens à janela
-		
-		
-		janela.start();
 		
 		
 		

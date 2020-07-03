@@ -1,7 +1,5 @@
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-public class Atividade extends PecasGeradas implements IPeca {
+public class Atividade extends PecasGeradas {
 
 	@Override
 	public char getname() {
@@ -38,7 +36,7 @@ public class Atividade extends PecasGeradas implements IPeca {
 
 	@Override
 	public void colisao_jogador(int[] vetor) {
-		tabuleiro[vetor[0]][vetor[1]].setmoved(true);
+		tabuleiro[vetor[0]][vetor[1]].setmoved(true);//usuario afetado pela atividade
 		tabuleiro[this.linha][this.coluna]=null;//peça some
 	}
 
