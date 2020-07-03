@@ -1,5 +1,3 @@
-# Projeto EaD Corona Run
-
 # Modelo de Apresentação do Projeto
 
 # Estrutura de Arquivos e Pastas
@@ -44,29 +42,22 @@ Projeto em Java, preferencialmente em Eclipse, incluindo todos os arquivos de da
 
 Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc. Coloque os arquivos aqui (mesmo que você mantenha uma cópia no diretório do código).
 
-# Modelo para Apresentação do Projeto
 
-Este é um guia de como produzir documentação em Markdown. Para entender como criar documentos em Markdown no Github, veja o material/vídeo:
-[Guia de Uso do Markdown](https://github.com/mc-unicamp/oficinas/tree/master/docs).
 
-Vide detalhes sobre o Markdown em: [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
 
-E mais especificamente sobre tabelas em: [Organizing information with tables](https://help.github.com/en/articles/organizing-information-with-tables)
-
-Segue abaixo o modelo de como deve ser documentado o projeto e cada componente do projeto. Tudo o que for indicado entre `<...>` indica algo que deve ser substituído pelo indicado. No modelo são colocados exemplos ilustrativos, que serão substituídos pelos do seu projeto.
-
-Para a construção dos diagramas, devem ser usados modelos disponíveis em: [Diagramas de Classes, Interfaces e Componentes](https://docs.google.com/presentation/d/1ML3WrnDtzh-4wqLmdXN9au1TBIwEqo7TIbMLNOYSMAI/edit?usp=sharing)
-
-# Modelo para Apresentação do Projeto
-
-# Projeto `<Título do Projeto/Jogo>`
+# Projeto EaD Corona Run
 
 # Descrição Resumida do Projeto/Jogo
 
-> <Descreva resumidamente o jogo e seu propósito.>
+O projeto consiste num jogo feito em espaco celular englobando a situação atual, incluindo  o Corona virus e o ensino EaD.
+
+O jogo tem como personagens um jogador, o qual pode ser selecionado dentre duas opções, sendo estas os participantes do grupo, Guilherme e Vitor e dois antagonistas, a Unicamp e uma pessoa contaminada com Covid-19, sendo que a primeira solta atividades e o segundo solta o virus.
+
+O jogador pode se mover livremente entre as casas utilizando os botões e direção e seu objetivo é coletar vacinas que vão aparecendo pelo mapa ao mesmo tempo que desvia das atividades lançadas pela Unicamp e do virus lançado pelo contaminado.
 
 # Equipe
-* `<nome completo>` - `<RA>`
+* Vitor Rodrigues Pietrobom - 245584
+* Guilherme Tezoli Bakaukas - 217332
 
 # Vídeos do Projeto
 
@@ -242,16 +233,8 @@ Método | Objetivo
 
 `<Monte uma tabela descritiva seguindo o exemplo>:`
 
-# Equipe
-* Vitor Rodrigues Pietrobom - 245584
-* Guilherme Tezoli Bakaukas - 217332
 
-# Descrição Resumida do Projeto
-O projeto consiste num jogo feito em espaco celular baseado em turnos.
 
-O jogo tem como personagens um jogador e dois antagonistas, a Unicamp e um doente, sendo que a primeira solta atividades e o segundo solta corona virus.
-
-A cada turno o jogador pode realizar um movimento e os antagonistas e personagens se movem,
 
 # Vídeo do Projeto
 [![Video explicativo sobre o projeto](https://img.youtube.com/vi/https://youtu.be/el5MtHRGmbc/0.jpg)](https://youtu.be/el5MtHRGmbc)
