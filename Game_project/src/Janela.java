@@ -44,6 +44,7 @@ public class Janela extends JFrame implements ActionListener{
 	private JButton player2;
 	private JButton next;
 	private JButton start;
+	private JButton insane;
 	private JButton hard;
 	private JButton medium;
 	private JButton easy;
@@ -137,14 +138,17 @@ public class Janela extends JFrame implements ActionListener{
 	    label_dificuldade = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE A DIFICULDADE:"+"</span></html>");
 	    panel_dificuldade.add(label_dificuldade);
 	    
+	    insane=new JButton("insano");
 	    hard=new JButton("difícil");
 	    medium=new JButton("médio");
 	    easy=new JButton("fácil");
 	    
+	    insane.addActionListener(this);
 	    hard.addActionListener(this);
 	    medium.addActionListener(this);
 	    easy.addActionListener(this);
 	    
+	    panel_dificuldade.add(insane);
 	    panel_dificuldade.add(hard);
 	    panel_dificuldade.add(medium);
 	    panel_dificuldade.add(easy);
@@ -249,6 +253,11 @@ public class Janela extends JFrame implements ActionListener{
 			if (player_defined==true & dificuldade_defined==true) {
 				start();//inicia o jogo
 			}
+		}
+		else if (e.getSource()==insane) {
+			this.seconds=100;
+			this.probabilidade=95;
+			dificuldade_defined=true;
 		}
 		else if (e.getSource()==hard) {
 			this.seconds=250;
