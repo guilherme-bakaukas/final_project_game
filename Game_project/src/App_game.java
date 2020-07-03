@@ -1,4 +1,3 @@
-import javax.swing.JButton;
 
 public class App_game {
 	
@@ -7,35 +6,11 @@ public class App_game {
 	public static void main(String[] args) {
 		Janela janela=new Janela();
 		
-    	JButton right=new JButton("right");
-    	janela.setButton(right);
-    	
-    	JButton left=new JButton("left");
-    	janela.setButton(left);
-    	
-    	JButton up=new JButton("up");
-    	janela.setButton(up);
-    	
-    	JButton down=new JButton("down");
-    	janela.setButton(down);
-    	
-		Usuario jogador= new Usuario(DIRETORIO+"Vitor.png");//adiciona a imagem animada no início
+		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png", DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png",DIRETORIO+"Doente.png", DIRETORIO+"Vacina.png",DIRETORIO+"caixao_meme.gif",DIRETORIO+"GuiAtividade.png",DIRETORIO+"VitorAtividade.png", DIRETORIO+"Instrucoes.png");
+		//vincula as imagens à janela
 		
-		jogador.vinculateButtons(up, right, left, down);
-		
-		right.addActionListener(jogador);
-		left.addActionListener(jogador);
-		up.addActionListener(jogador);
-		down.addActionListener(jogador);
-			
-		janela.setAmbiente(DIRETORIO+"Vazio.jpg", DIRETORIO+"Unicamp.png",jogador, DIRETORIO+ "corona.png", DIRETORIO+ "Atividade.png");
-		//cria o ambiente inicial
-		
-		janela.start();
-		
-		
-		
-    	
+		janela.painel_instrucoes();
+		janela.set_painel_inicial(DIRETORIO+"GuiRaw.png",DIRETORIO+"VitorRaw.png");
 
 	}
 

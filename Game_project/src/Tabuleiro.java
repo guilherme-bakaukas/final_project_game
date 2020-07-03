@@ -1,13 +1,14 @@
 import java.awt.GridLayout;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
-public class Tabuleiro {
+public class Tabuleiro implements ActionListener {
 	private static final long serialVersionUID = -6380363143384619115L;
 	
 	private String ambiente;
@@ -15,12 +16,29 @@ public class Tabuleiro {
 	private Usuario usuario;
 	private String corona;
 	private String atividade;
+	private String doente;
+	private String vacina;
 	
 	public JPanel imagePane;
 	private Janela janela;
 	
+	private int rodadas;
 	public int coluna,linha;
+	public int points;
 	public IPeca[][] tabuleiro;
+	
+	public boolean verificadora;
+	private boolean gerar;
+	
+	public Timer timer;
+
+	private String gui_atividade;
+
+	private String vitor_atividade;
+
+	private int seconds;
+
+	private int probabilidade;
 
 	
 
@@ -29,6 +47,7 @@ public class Tabuleiro {
 		this.janela=janela;
 		this.linha=linha;
 		this.coluna=coluna;
+		this.gerar=false;
 		
 		imagePane= new JPanel();// painel das imagens
         imagePane.setLayout(new GridLayout(linha,coluna));
@@ -37,23 +56,35 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade) {//tabuleiro em seu estado inicial
-		
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina, int probabilidade,int seconds) {
+		//tabuleiro em seu estado inicial
+		this.seconds=seconds;
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
 		this.unicamp=unicamp;
 		this.corona=corona;
 		this.atividade=atividade;
+		this.doente=doente;
+		this.vacina=vacina; 
 		
 		
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (l==0 & c==0) {
-					tabuleiro[l][c]= new Unicamp(unicamp,atividade);//passamos a referencia da imagem da atividade para a criação da atividade
-					tabuleiro[l][c].vinculate_tabuleiro(this);//
+					tabuleiro[l][c]= new Unicamp(unicamp,atividade,probabilidade);//passamos a referencia da imagem da atividade para a criação da atividade
+					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else if (l==this.linha-1 & c==this.coluna-1) {
 					tabuleiro[l][c]= usuario;
+					tabuleiro[l][c].vinculate_tabuleiro(this);
+					this.rodadas=0;//variável para contabilizar as rodadas em que o usuario está sem poder jogar
+				}
+				else if (l==0 & c==this.coluna-1) {
+					tabuleiro[l][c]=new Doente(doente,corona,probabilidade);
+					tabuleiro[l][c].vinculate_tabuleiro(this);
+				}
+				else if (l==5 & c==5) {
+					tabuleiro[l][c]=new Vacina(vacina);
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else {
@@ -66,23 +97,12 @@ public class Tabuleiro {
 	}
 	
 	
-	private Timer timer=new Timer();//define uma movimentação periódica das peças automáticas do tabuleiro
-	private long segundos=1000;
+	public void start() {
+		timer=new Timer(this.seconds,this);
+		timer.start();
 		
-	private TimerTask tarefa = new TimerTask() {
-
-	@Override
-	public void run() {
-		movimentar_pecas();//movimenta as peças automáticamente
-		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
-		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
-	}		
-	};
-		
-	
-	public void start() {//começa a rodar o timer e cosequentemente as peças se movimentam automaticamente
-		timer.schedule(tarefa, 2000, 2000);
 	}
+	
 	
 	private void movimentar_pecas() {
 		//método que percorre o tabuleiro e movimenta as peças
@@ -90,14 +110,19 @@ public class Tabuleiro {
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (tabuleiro[l][c]!=null) {
-					if (tabuleiro[l][c].getname()=='u' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada
-						tabuleiro = tabuleiro[l][c].move();
+					if (tabuleiro[l][c].getname()!='j' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada para não movê-lo novamente
+						tabuleiro[l][c].move();
 					}
-					else if (tabuleiro[l][c].getname()=='c' & tabuleiro[l][c].getmoved()==false) {
-						tabuleiro=tabuleiro[l][c].move();
-					}
-					else if (tabuleiro[l][c].getname()=='a' & tabuleiro[l][c].getmoved()==false) {
-						tabuleiro=tabuleiro[l][c].move();
+					else if (tabuleiro[l][c].getname()=='j') {//fazemos a verificação se poderá se mover
+						if (tabuleiro[l][c].getmoved()==true) {
+							if (rodadas<2) {//deve passar duas rodadas sem se mover
+								this.rodadas++;
+							}
+							else {//retornar a sua normalidade na movimentação
+								rodadas=0;
+								tabuleiro[l][c].setmoved(false);
+							}
+						}
 					}
 				}
 			}
@@ -106,7 +131,34 @@ public class Tabuleiro {
 		
 	}
 	
-	public void layout_tabuleiro() {
+	private void gera_pecas() {//verifica se haverá geração de peças
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]!=null) {
+					if (tabuleiro[l][c].getname()=='u') {
+						tabuleiro[l][c].move();//realiza a verificaçaõ de geração
+					}
+					if (tabuleiro[l][c].getname()=='d') {
+						tabuleiro[l][c].move();
+					}
+				}
+			}
+		}
+	}
+	
+	private void reorganizar_tabuleiro() {//os componentes assumem um moved=false para se movimentarem na rodada seguinte
+		for (int l=0;l<this.linha;l++) {
+			for (int c=0;c<this.coluna;c++) {
+				if (tabuleiro[l][c]!=null) {
+					if (tabuleiro[l][c].getname()!='j' & tabuleiro[l][c].getname()!='v') {
+						tabuleiro[l][c].setmoved(false);
+					}
+				}
+			}
+		}
+	}
+	
+	public void layout_tabuleiro() {//atualiza o painel do tabuleiro
 		
 		imagePane.removeAll();
 		
@@ -121,33 +173,69 @@ public class Tabuleiro {
 				    ImageIcon imagem = new ImageIcon(unicamp);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);//reseta o getmoved (para poder movê-lo na próxima rodada)
 					
 				}
 				else if (tabuleiro[l][c].getname()=='j') {
 				    ImageIcon imagem = new ImageIcon(usuario.image);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 				else if (tabuleiro[l][c].getname()=='c') {
 				    ImageIcon imagem = new ImageIcon(corona);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
 				}
 				else if (tabuleiro[l][c].getname()=='a') {
 				    ImageIcon imagem = new ImageIcon(atividade);
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
-					tabuleiro[l][c].setmoved(false);
+				}
+				else if (tabuleiro[l][c].getname()=='d') {
+				    ImageIcon imagem = new ImageIcon(doente);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+				}
+				else if (tabuleiro[l][c].getname()=='v') {
+				    ImageIcon imagem = new ImageIcon(vacina);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
 				}
 			}
 		}
 		
 	}
+	public void atualizar_pontuation() {
+		points++;
+		layout_tabuleiro();
+		janela.atualizar_pontuation(points);
+	}
 	public void atualizar_tabuleiro() {
 		janela.atualizar();
+	}
+	
+	public void die() {//para o timer no momento da morte do usuario
+		timer.stop();
+		janela.stop();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
+		
+		if (gerar==false) {
+			movimentar_pecas();//movimenta as peças automáticamente
+			gerar=true;
+		}
+		else if (gerar==true) {
+			gera_pecas();//verifica se haverá geração de peças
+			reorganizar_tabuleiro();//reseta o moved das peças
+			gerar=false;
+		}
+		
+		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
+		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
+		
 	}
 	
 }

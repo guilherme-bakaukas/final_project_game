@@ -5,65 +5,70 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Usuario extends Peca implements ActionListener,IPeca {
+public class Usuario extends Peca implements ActionListener {
 	private static final long serialVersionUID = -8007636677009859732L;
 	
 	private JButton up,right,left,down;
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
-	private char name;
 	private boolean moved;
+
+	private String player_atividade;
+
+	private String normal_player;
 	
 	public void actionPerformed(ActionEvent event) {
 		
-		int[] vetor= {linha,coluna};
-		
-		if (event.getSource()==right) {
-			vetor[1]++;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.coluna++;
-				tabuleiro=this.move();
-			}
-		}
-		else if (event.getSource()==left) {
-			vetor[1]--;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.coluna--;
-				tabuleiro=this.move();
-			}
-		}
-		else if (event.getSource()==up) {
+		if (this.moved==false) {//verifica se poderá se mover ou se está sob efeito da atividade (2 rodadas)
+			int[] vetor= {linha,coluna};
 			
-			vetor[0]--;
+			if (event.getSource()==right) {
+				vetor[1]++;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.coluna++;
+					this.move();
+				}
+			}
+			else if (event.getSource()==left) {
+				vetor[1]--;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.coluna--;
+					this.move();
+				}
+			}
+			else if (event.getSource()==up) {	
+				vetor[0]--;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.linha--;
+					this.move();
+				}
+			}
+			else if (event.getSource()==down) {
+				vetor[0]++;
+				if (verifica_movimento(vetor)==true) {
+					tabuleiro[linha][coluna]=null;
+					this.linha++;
+					this.move();
+				}
+			}
 			
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.linha--;
-				tabuleiro=this.move();
-			}
+			//FALTA VERIFICAR COLISÕES
+			tab.layout_tabuleiro();
+			tab.atualizar_tabuleiro();
 		}
-		else if (event.getSource()==down) {
-			vetor[0]++;
-			if (super.verifica_movimento(vetor,tab)==true) {
-				tabuleiro[linha][coluna]=null;
-				this.linha++;
-				tabuleiro=this.move();
-			}
-		}
-		
-		//FALTA VERIFICAR COLISÕES
-		
-		tab.layout_tabuleiro();
-		tab.atualizar_tabuleiro();
+
 		
 	}
 	
-	public Usuario(String image) {
+	public Usuario(String image, String player_atividade) {
 		this.name='j';
 		this.moved=false;
+		this.normal_player=image;
 		this.image=image;
+		this.player_atividade=player_atividade;
 	}
 
 	public void vinculateButtons(JButton up,JButton right,JButton left,JButton down) {
@@ -84,9 +89,8 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 		return this.name;
 	}
 
-	public IPeca[][] move() {
+	public void move() {
 		tabuleiro[linha][coluna]=this;
-		return tabuleiro;
 	}
 	
 	public boolean getmoved() {
@@ -95,10 +99,41 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	}
 
 	public void setmoved(boolean b) {
+		if (b==true) {
+			this.image=player_atividade;//determina quando o usuario não pode se mexer (imagem do usuario com atividade)
+		}
+		else if (b==false) {
+			this.image=normal_player;//esse método é utilizado quando o usuario passa a poder se movimentar (imagem usuario normal)
+		}
 		this.moved=b;
 		
 	}
-
+	
+	private boolean verifica_movimento(int[] vetor) {
+		if (super.verifica_movimento(vetor, tab)==false) return false;//indica uma posição inexistente no tabuleiro
+		if (tabuleiro[vetor[0]][vetor[1]]!=null) {//posição ocupada
+			switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
+			case 'a':
+				this.setmoved(true);//pegou atividade e deverá ficar sem movimentar por duas rodadas
+				break;
+			case 'c':
+				this.moved=true;
+				tab.die();//usuario morre
+				break;
+			case 'v':
+				tabuleiro[vetor[0]][vetor[1]].move();//é movimentado na rodada seguinte
+				tabuleiro[vetor[0]][vetor[1]]=null;
+				tab.atualizar_pontuation();//atualiza o painel de pontuação
+				break;
+			case 'u':
+				return false;//não poderia se movimentar caso haja unicamp ou doente na posição requerida
+			case 'd':
+				return false;
+			}
+		}
+		return true;
+		
+	}
 
 
 }
