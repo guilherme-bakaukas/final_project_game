@@ -40,25 +40,28 @@ public class Janela extends JFrame implements ActionListener{
 	private String vacina;
 	private String player1_gui;
 	private String player2_vitor;
+	private String gui_atividade;
+	private String vitor_atividade;
+	private String instrucoes;
 	
 	private JButton try_again;
 	private JButton player1;
 	private JButton player2;
+	private JButton next;
 
 	private JPanel pontuationPane;
 	private int points;
 
 	private JPanel panelPontuation;
-
 	private JLabel labelPontuation;
 
-	private String gui_atividade;
+	private JLabel label_text;
 
-	private String vitor_atividade;
+	private JPanel panel_text;
 
-	private String instrucoes;
-	
-	private JButton next;
+	private JPanel painel_personagens;
+
+
 	
 	
 	public Janela(){
@@ -97,17 +100,10 @@ public class Janela extends JFrame implements ActionListener{
 	public void set_painel_inicial(String player1_gui, String player2_vitor) {
 		this.player1_gui=player1_gui;
 		this.player2_vitor=player2_vitor;
-	}
-	
-	public void painel_inicial() {
+		panel_text = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		label_text = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE O SEU PERSONAGEM:"+"</span></html>");
+		panel_text.add(label_text);
 		
-		
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel label = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE O SEU PERSONAGEM:"+"</span></html>");
-
-		panel.add(label);
-		principalPane.add(panel, BorderLayout.NORTH);
-	
 		ImageIcon gui = new ImageIcon (player1_gui);
 		ImageIcon vitor = new ImageIcon (player2_vitor);
 		
@@ -123,14 +119,17 @@ public class Janela extends JFrame implements ActionListener{
 	    player1.addActionListener(this);
 	    player2.addActionListener(this);
 	    
-	    JPanel painel = new JPanel();
-	    painel.setLayout(new FlowLayout(FlowLayout.CENTER));
-	    principalPane.add(painel,BorderLayout.CENTER);
-	    
-	    painel.add(player1);
-	    painel.add(player2);
-	    
-	      
+	    painel_personagens = new JPanel();
+	    painel_personagens.setLayout(new FlowLayout(FlowLayout.CENTER));
+	    painel_personagens.add(player1);
+	    painel_personagens.add(player2);
+		
+	}
+	
+	public void painel_inicial() {
+		
+		principalPane.add(panel_text, BorderLayout.NORTH);
+	    principalPane.add(painel_personagens,BorderLayout.CENTER);    
 	    SwingUtilities.updateComponentTreeUI(this);
 	}
 

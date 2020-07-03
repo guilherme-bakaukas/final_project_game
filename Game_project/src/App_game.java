@@ -12,8 +12,6 @@ public class App_game {
 		//vincula as imagens à janela
 		
 		janela.painel_instrucoes();
-		
-    	
 
 	}
 
