@@ -23,9 +23,12 @@ public class Tabuleiro {
 	
 	private int rodadas;
 	public int coluna,linha;
+	public int points;
 	public IPeca[][] tabuleiro;
 	private boolean gerar;
 
+	private Timer timer;
+	private TimerTask tarefa;
 
 	
 
@@ -43,7 +46,8 @@ public class Tabuleiro {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina) {//tabuleiro em seu estado inicial
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina) {
+		//tabuleiro em seu estado inicial
 		
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
@@ -69,6 +73,10 @@ public class Tabuleiro {
 					tabuleiro[l][c]=new Doente(doente,corona);
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
+				else if (l==5 & c==5) {
+					tabuleiro[l][c]=new Vacina(vacina);
+					tabuleiro[l][c].vinculate_tabuleiro(this);
+				}
 				else {
 					tabuleiro[l][c]=null;
 				}
@@ -79,12 +87,9 @@ public class Tabuleiro {
 	}
 	
 	
-	private Timer timer;
-	private long segundos=1000;
-		
-	private TimerTask tarefa;
 	
 	public void start() {//começa a rodar o timer e cosequentemente as peças se movimentam automaticamente
+		this.points=0;
 		timer=new Timer();
 		tarefa = new TimerTask() {
 
@@ -107,7 +112,7 @@ public class Tabuleiro {
 				janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
 			}	
 			};
-		timer.schedule(tarefa, 1000, 1000);
+		timer.schedule(tarefa, 800, 800);
 	}
 	
 	private void movimentar_pecas() {
@@ -116,28 +121,19 @@ public class Tabuleiro {
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (tabuleiro[l][c]!=null) {
-					if (tabuleiro[l][c].getname()=='u' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada
-						tabuleiro = tabuleiro[l][c].move();
-					}
-					else if (tabuleiro[l][c].getname()=='c' & tabuleiro[l][c].getmoved()==false) {
-						tabuleiro=tabuleiro[l][c].move();
-					}
-					else if (tabuleiro[l][c].getname()=='a' & tabuleiro[l][c].getmoved()==false) {
-						tabuleiro=tabuleiro[l][c].move();
+					if (tabuleiro[l][c].getname()!='j' & tabuleiro[l][c].getmoved()==false) {//verifica qual componente e se já foi movido na rodada para não movê-lo novamente
+						tabuleiro[l][c].move();
 					}
 					else if (tabuleiro[l][c].getname()=='j') {//fazemos a verificação se poderá se mover
 						if (tabuleiro[l][c].getmoved()==true) {
 							if (rodadas<2) {//deve passar duas rodadas sem se mover
 								this.rodadas++;
 							}
-							else {
+							else {//retornar a sua normalidade na movimentação
 								rodadas=0;
 								tabuleiro[l][c].setmoved(false);
 							}
 						}
-					}
-					else if (tabuleiro[l][c].getname()=='d' & tabuleiro[l][c].getmoved()==false) {
-						tabuleiro=tabuleiro[l][c].move();
 					}
 				}
 			}
@@ -146,7 +142,7 @@ public class Tabuleiro {
 		
 	}
 	
-	private void gera_pecas() {
+	private void gera_pecas() {//verifica se haverá geração de peças
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (tabuleiro[l][c]!=null) {
@@ -161,11 +157,11 @@ public class Tabuleiro {
 		}
 	}
 	
-	private void reorganizar_tabuleiro() {
+	private void reorganizar_tabuleiro() {//os componentes assumem um moved=false para se movimentarem na rodada seguinte
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (tabuleiro[l][c]!=null) {
-					if (tabuleiro[l][c].getname()!='j') {
+					if (tabuleiro[l][c].getname()!='j' & tabuleiro[l][c].getname()!='v') {
 						tabuleiro[l][c].setmoved(false);
 					}
 				}
@@ -173,7 +169,7 @@ public class Tabuleiro {
 		}
 	}
 	
-	public void layout_tabuleiro() {
+	public void layout_tabuleiro() {//atualiza o painel do tabuleiro
 		
 		imagePane.removeAll();
 		
@@ -210,15 +206,25 @@ public class Tabuleiro {
 				    JLabel campoImagem = new JLabel(imagem);
 					imagePane.add(campoImagem);
 				}
+				else if (tabuleiro[l][c].getname()=='v') {
+				    ImageIcon imagem = new ImageIcon(vacina);
+				    JLabel campoImagem = new JLabel(imagem);
+					imagePane.add(campoImagem);
+				}
 			}
 		}
 		
+	}
+	public void atualizar_pontuation() {
+		points++;
+		layout_tabuleiro();
+		janela.atualizar_pontuation(points);
 	}
 	public void atualizar_tabuleiro() {
 		janela.atualizar();
 	}
 	
-	public void die() {
+	public void die() {//para o timer no momento da morte do usuario
 		timer.cancel();
 		janela.stop();
 	}

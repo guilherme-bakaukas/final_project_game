@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Usuario extends Peca implements ActionListener,IPeca {
+public class Usuario extends Peca implements ActionListener {
 	private static final long serialVersionUID = -8007636677009859732L;
 	
 	private JButton up,right,left,down;
@@ -23,7 +23,7 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				if (verifica_movimento(vetor)==true) {
 					tabuleiro[linha][coluna]=null;
 					this.coluna++;
-					tabuleiro=this.move();
+					this.move();
 				}
 			}
 			else if (event.getSource()==left) {
@@ -31,7 +31,7 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				if (verifica_movimento(vetor)==true) {
 					tabuleiro[linha][coluna]=null;
 					this.coluna--;
-					tabuleiro=this.move();
+					this.move();
 				}
 			}
 			else if (event.getSource()==up) {	
@@ -39,7 +39,7 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				if (verifica_movimento(vetor)==true) {
 					tabuleiro[linha][coluna]=null;
 					this.linha--;
-					tabuleiro=this.move();
+					this.move();
 				}
 			}
 			else if (event.getSource()==down) {
@@ -47,7 +47,7 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 				if (verifica_movimento(vetor)==true) {
 					tabuleiro[linha][coluna]=null;
 					this.linha++;
-					tabuleiro=this.move();
+					this.move();
 				}
 			}
 			
@@ -84,9 +84,8 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 		return this.name;
 	}
 
-	public IPeca[][] move() {
+	public void move() {
 		tabuleiro[linha][coluna]=this;
-		return tabuleiro;
 	}
 	
 	public boolean getmoved() {
@@ -100,18 +99,22 @@ public class Usuario extends Peca implements ActionListener,IPeca {
 	}
 	
 	private boolean verifica_movimento(int[] vetor) {
-		if (super.verifica_movimento(vetor, tab)==false) return false;
-		if (tabuleiro[vetor[0]][vetor[1]]!=null) {
+		if (super.verifica_movimento(vetor, tab)==false) return false;//indica uma posição inexistente no tabuleiro
+		if (tabuleiro[vetor[0]][vetor[1]]!=null) {//posição ocupada
 			switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
 			case 'a':
-				this.moved=true;
+				this.moved=true;//pegou atividade e deverá ficar sem movimentar por duas rodadas
 				break;
 			case 'c':
-				System.out.println("morreu");//mensagem de teste
-				tab.die();
+				tab.die();//usuario morre
+				break;
+			case 'v':
+				tabuleiro[vetor[0]][vetor[1]].move();//é movimentado na rodada seguinte
+				tabuleiro[vetor[0]][vetor[1]]=null;
+				tab.atualizar_pontuation();//atualiza o painel de pontuação
 				break;
 			case 'u':
-				return false;
+				return false;//não poderia se movimentar caso haja unicamp ou doente na posição requerida
 			case 'd':
 				return false;
 			}

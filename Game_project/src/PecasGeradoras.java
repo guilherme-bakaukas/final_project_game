@@ -13,7 +13,7 @@ public abstract class PecasGeradoras extends Peca {
 		return true;
 	}
 	
-	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
+	public void move() {//retorna o vetor de posições {linha,coluna} para movimentação
 		
 		int[] vetor= random_positions();
 		while(verifica_movimento(vetor)==false) {
@@ -29,8 +29,22 @@ public abstract class PecasGeradoras extends Peca {
 		
 		this.moved=true;//indica que a peça já realizou seu movimento
 		
-		return tabuleiro;
-		
 		
 	}
+	
+	public int[] create_position() {//retorna a posição da peça criada
+		
+		boolean verificadora=true;
+		int [] vetor = random_positions();
+		while(verificadora) {
+			if ((vetor[0])<tab.linha & (vetor[0])>=0 & (vetor[1])<tab.coluna & (vetor[1]>=0)){
+				verificadora=false;
+			}
+			else {
+				vetor=random_positions();
+			}
+		}
+		return vetor;
+	}
 }
+

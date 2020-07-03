@@ -7,7 +7,7 @@ public abstract class PecasGeradas extends Peca {
 	protected int incremento_coluna;
 	protected boolean moved;
 	
-	public IPeca[][] move() {//retorna o vetor de posições {linha,coluna} para movimentação
+	public void move() {//retorna o vetor de posições {linha,coluna} para movimentação
 		
 		int[] vetor= {linha+incremento_linha,coluna+incremento_coluna};
 		
@@ -37,10 +37,9 @@ public abstract class PecasGeradas extends Peca {
 			tabuleiro[this.linha][this.coluna]=null;//a peça some
 		}
 			
-		return tabuleiro;
 		
 	}
 	
-	public abstract void colisao_jogador(int[] vetor);
+	public abstract void colisao_jogador(int[] vetor);//método para tratar da colisão com o usuario
 
 }
