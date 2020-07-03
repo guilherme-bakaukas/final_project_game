@@ -51,6 +51,14 @@ public class Janela extends JFrame implements ActionListener{
 	private JPanel panelPontuation;
 
 	private JLabel labelPontuation;
+
+	private String gui_atividade;
+
+	private String vitor_atividade;
+
+	private String instrucoes;
+	
+	private JButton next;
 	
 	
 	public Janela(){
@@ -68,16 +76,38 @@ public class Janela extends JFrame implements ActionListener{
 
     }
 	
-	public void painel_inicial(String player1_gui, String player2_vitor) {
+	public void painel_instrucoes() {//painel de instruções do jogo aparece logo no início
+		
+	    ImageIcon imagem = new ImageIcon(instrucoes);
+	    JLabel campoImagem = new JLabel(imagem);
+	    principalPane.add(campoImagem, BorderLayout.CENTER);
+	    
+		startPane = new JPanel();
+		
+		next=new JButton("next");
+		next.addActionListener(this);
+		
+		startPane.add(next);
+		
+		principalPane.add(startPane,BorderLayout.SOUTH);//adicionado o botão para reiniciar o jogo
+	    
+	    SwingUtilities.updateComponentTreeUI(this);
+	}
+	
+	public void set_painel_inicial(String player1_gui, String player2_vitor) {
+		this.player1_gui=player1_gui;
+		this.player2_vitor=player2_vitor;
+	}
+	
+	public void painel_inicial() {
+		
 		
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel label = new JLabel("SELECIONE O SEU PERSONAGEM:");
+		JLabel label = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE O SEU PERSONAGEM:"+"</span></html>");
 
 		panel.add(label);
 		principalPane.add(panel, BorderLayout.NORTH);
-		
-		this.player1_gui=player1_gui;
-		this.player2_vitor=player2_vitor;
+	
 		ImageIcon gui = new ImageIcon (player1_gui);
 		ImageIcon vitor = new ImageIcon (player2_vitor);
 		
@@ -94,11 +124,12 @@ public class Janela extends JFrame implements ActionListener{
 	    player2.addActionListener(this);
 	    
 	    JPanel painel = new JPanel();
-	    painel.setLayout(new FlowLayout());
+	    painel.setLayout(new FlowLayout(FlowLayout.CENTER));
+	    principalPane.add(painel,BorderLayout.CENTER);
+	    
 	    painel.add(player1);
 	    painel.add(player2);
 	    
-	    principalPane.add(painel,BorderLayout.CENTER);
 	      
 	    SwingUtilities.updateComponentTreeUI(this);
 	}
@@ -110,7 +141,7 @@ public class Janela extends JFrame implements ActionListener{
     	controlPane2.add(botao);
     }
 
-	public void setAmbiente(String arquivo, String unicamp, String corona, String atividade, String doente,String vacina, String caixao) {
+	public void setAmbiente(String arquivo, String unicamp, String corona, String atividade, String doente,String vacina, String caixao,String gui_atividade,String vitor_atividade, String instrucoes) {
 		//vicula as imagens a essa classe
 		this.arquivo=arquivo;
 		this.unicamp=unicamp;
@@ -119,12 +150,15 @@ public class Janela extends JFrame implements ActionListener{
 		this.doente=doente;
 		this.vacina=vacina;
 		this.caixao=caixao;
+		this.gui_atividade=gui_atividade;
+		this.vitor_atividade=vitor_atividade;
+		this.instrucoes=instrucoes;
 	}
 	
 	
 	public void atualizar_pontuation(int points) {//atualiza a pontuação
 		this.points=points;
-		labelPontuation=new JLabel("Pontuação: "+ points);
+		labelPontuation=new JLabel("<html><span style='font-size:20px'>"+"Pontuação: "+ points+"</span></html>");
 		panelPontuation.removeAll();
 		panelPontuation.add(labelPontuation);
 		SwingUtilities.updateComponentTreeUI(this);
@@ -142,7 +176,7 @@ public class Janela extends JFrame implements ActionListener{
 		principalPane.add(campoImagem,BorderLayout.CENTER);//adicionado o gif do caixão
 		
 		panelPontuation = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		labelPontuation = new JLabel("Parabéns, sua pontuação foi de: "+ points + " vacinas");
+		labelPontuation = new JLabel("<html><span style='font-size:30px'>"+"Parabéns, sua pontuação foi de: "+ points + " vacinas"+"</span></html>");
 		panelPontuation.add(labelPontuation);
 		principalPane.add(panelPontuation, BorderLayout.NORTH);
 		
@@ -164,21 +198,25 @@ public class Janela extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if (e.getSource()==try_again) {//caso o usuario queira jogar novamente e pressione o botao try again
 			principalPane.removeAll();
-			this.painel_inicial(player1_gui,player2_vitor);//retorna ao painel de escolha do personagem
+			this.painel_inicial();//retorna ao painel de escolha do personagem
 		}
 		else if (e.getSource()==player1) {//escolha do personagem gui
 			points=0;//zera a pontuação para o início do jogo
 			setPanels_game();
-			setButtons_player(player1_gui);
-			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente,vacina);
+			setButtons_player(player1_gui,gui_atividade);
+			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente, vacina);
 			tabuleiro.start();//inicia o jogo
 		}
 		else if (e.getSource()==player2) {//escolha do personagem vitor
 			points=0;//zera a pontuação para o inicio do jogo
 			setPanels_game();
-			setButtons_player(player2_vitor);
-			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente,vacina);
+			setButtons_player(player2_vitor,vitor_atividade);
+			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente, vacina);
 			tabuleiro.start();//inicia o jogo
+		}
+		else if (e.getSource()==next) {
+			principalPane.removeAll();
+			this.painel_inicial();
 		}
 		
 		SwingUtilities.updateComponentTreeUI(this);
@@ -186,7 +224,7 @@ public class Janela extends JFrame implements ActionListener{
 		
 	}
 	
-	private void setButtons_player(String player) {//vicula o usuario aos botoes
+	private void setButtons_player(String player, String player_atividade) {//vicula o usuario aos botoes
     	JButton up=new JButton("up");
     	this.setButtonUp(up);
     	
@@ -199,7 +237,7 @@ public class Janela extends JFrame implements ActionListener{
     	JButton right=new JButton("right");
     	this.setButton(right);
     		 	
-		usuario = new Usuario(player);//vincula o usuario ao personagem escolhido
+		usuario = new Usuario(player, player_atividade);//vincula o usuario ao personagem escolhido
 		
 		usuario.vinculateButtons(up, right, left, down);
 		
@@ -213,11 +251,11 @@ public class Janela extends JFrame implements ActionListener{
 		
 		principalPane.removeAll();
 		
-        tabuleiro= new Tabuleiro(this,10,10);// painel das imagens
+        tabuleiro= new Tabuleiro(this,10,15);// painel das imagens
         principalPane.add(tabuleiro.imagePane,BorderLayout.CENTER);
         
 		panelPontuation = new JPanel(new FlowLayout(FlowLayout.CENTER));//painel da pontuação
-		labelPontuation = new JLabel("Pontuação: "+ points);
+		labelPontuation = new JLabel("<html><span style='font-size:20px'>"+"Pontuação: "+ points+"</span></html>");
 		panelPontuation.add(labelPontuation);
 		principalPane.add(panelPontuation, BorderLayout.NORTH);
         

@@ -1,13 +1,14 @@
 import java.awt.GridLayout;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
-public class Tabuleiro {
+public class Tabuleiro implements ActionListener {
 	private static final long serialVersionUID = -6380363143384619115L;
 	
 	private String ambiente;
@@ -25,10 +26,15 @@ public class Tabuleiro {
 	public int coluna,linha;
 	public int points;
 	public IPeca[][] tabuleiro;
+	
+	public boolean verificadora;
 	private boolean gerar;
+	
+	public Timer timer;
 
-	private Timer timer;
-	private TimerTask tarefa;
+	private String gui_atividade;
+
+	private String vitor_atividade;
 
 	
 
@@ -87,33 +93,11 @@ public class Tabuleiro {
 	}
 	
 	
-	
-	public void start() {//começa a rodar o timer e cosequentemente as peças se movimentam automaticamente
-		this.points=0;
-		timer=new Timer();
-		tarefa = new TimerTask() {
-
-			@Override
-			public void run() {
-				
-				//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
-				
-				if (gerar==false) {
-					movimentar_pecas();//movimenta as peças automáticamente
-					gerar=true;
-				}
-				else if (gerar==true) {
-					gera_pecas();//verifica se haverá geração de peças
-					reorganizar_tabuleiro();//reseta o moved das peças
-					gerar=false;
-				}
-				
-				layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
-				janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
-			}	
-			};
-		timer.schedule(tarefa, 800, 800);
+	public void start() {
+		timer=new Timer(700,this);
+		timer.start();
 	}
+	
 	
 	private void movimentar_pecas() {
 		//método que percorre o tabuleiro e movimenta as peças
@@ -225,8 +209,28 @@ public class Tabuleiro {
 	}
 	
 	public void die() {//para o timer no momento da morte do usuario
-		timer.cancel();
+		timer.stop();
 		janela.stop();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
+		
+		if (gerar==false) {
+			movimentar_pecas();//movimenta as peças automáticamente
+			gerar=true;
+		}
+		else if (gerar==true) {
+			gera_pecas();//verifica se haverá geração de peças
+			reorganizar_tabuleiro();//reseta o moved das peças
+			gerar=false;
+		}
+		
+		layout_tabuleiro();//reorganiza o layout do tabuleiro após as movimentações
+		janela.atualizar();//faz a sincronização com do container com o painel (ImagePane)
+		
 	}
 	
 }

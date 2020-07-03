@@ -48,7 +48,7 @@ public class Unicamp extends PecasGeradoras {
 	
 	private void verifica_atividade() {
 		int num=new Random().nextInt(100 + 1);
-		if (num<=30) {//chance de 30% de criar atividade
+		if (num<=35) {//chance de 30% de criar atividade
 			this.create_atividade();
 		}	
 	}

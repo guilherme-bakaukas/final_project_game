@@ -12,6 +12,10 @@ public class Usuario extends Peca implements ActionListener {
 	private Tabuleiro tab;
 	private IPeca[][] tabuleiro;
 	private boolean moved;
+
+	private String player_atividade;
+
+	private String normal_player;
 	
 	public void actionPerformed(ActionEvent event) {
 		
@@ -52,7 +56,6 @@ public class Usuario extends Peca implements ActionListener {
 			}
 			
 			//FALTA VERIFICAR COLISÕES
-			
 			tab.layout_tabuleiro();
 			tab.atualizar_tabuleiro();
 		}
@@ -60,10 +63,12 @@ public class Usuario extends Peca implements ActionListener {
 		
 	}
 	
-	public Usuario(String image) {
+	public Usuario(String image, String player_atividade) {
 		this.name='j';
 		this.moved=false;
+		this.normal_player=image;
 		this.image=image;
+		this.player_atividade=player_atividade;
 	}
 
 	public void vinculateButtons(JButton up,JButton right,JButton left,JButton down) {
@@ -94,6 +99,12 @@ public class Usuario extends Peca implements ActionListener {
 	}
 
 	public void setmoved(boolean b) {
+		if (b==true) {
+			this.image=player_atividade;//determina quando o usuario não pode se mexer (imagem do usuario com atividade)
+		}
+		else if (b==false) {
+			this.image=normal_player;//esse método é utilizado quando o usuario passa a poder se movimentar (imagem usuario normal)
+		}
 		this.moved=b;
 		
 	}
@@ -103,7 +114,7 @@ public class Usuario extends Peca implements ActionListener {
 		if (tabuleiro[vetor[0]][vetor[1]]!=null) {//posição ocupada
 			switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
 			case 'a':
-				this.moved=true;//pegou atividade e deverá ficar sem movimentar por duas rodadas
+				this.setmoved(true);//pegou atividade e deverá ficar sem movimentar por duas rodadas
 				break;
 			case 'c':
 				tab.die();//usuario morre
