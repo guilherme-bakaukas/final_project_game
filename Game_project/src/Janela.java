@@ -251,13 +251,13 @@ public class Janela extends JFrame implements ActionListener{
 			}
 		}
 		else if (e.getSource()==hard) {
-			this.seconds=500;
-			this.probabilidade=45;
+			this.seconds=250;
+			this.probabilidade=80;
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==medium) {
-			this.seconds=750;
-			this.probabilidade=35;
+			this.seconds=500;
+			this.probabilidade=50;
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==easy) {
