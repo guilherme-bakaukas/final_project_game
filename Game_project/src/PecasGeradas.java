@@ -11,7 +11,11 @@ public abstract class PecasGeradas extends Peca {
 		
 		int[] vetor= {linha+incremento_linha,coluna+incremento_coluna};
 		
-		if (super.verifica_movimento(vetor,tab)==true) {
+		try{
+			
+			super.verifica_movimento(vetor,tab);
+		
+		
 			
 			if (tabuleiro[vetor[0]][vetor[1]]==null) {
 				tabuleiro[this.linha][this.coluna]=null;
@@ -32,10 +36,13 @@ public abstract class PecasGeradas extends Peca {
 			}
 			
 		}
-		
-		else {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente
+		catch(MovimentoInvalido erro) {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente
 			tabuleiro[this.linha][this.coluna]=null;//a peça some
 		}
+		catch(Exception erro) {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente
+			System.out.println("Outro erro: " + erro.getMessage());
+		}
+		
 			
 		
 	}

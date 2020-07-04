@@ -6,19 +6,31 @@ public abstract class PecasGeradoras extends Peca {
 	protected IPeca[][] tabuleiro;
 	protected boolean moved;
 	
-	public boolean verifica_movimento(int[] vetor) {
-		if (super.verifica_movimento(vetor,tab)==false) return false; //verifica se está nos limites do tabuleiro
-		else if (tabuleiro[vetor[0]][vetor[1]]!=null) {//verifica se o espaço está vazio para ir
-			return false;
+	public void verifica_movimento(int[] vetor) throws MovimentoInvalido {
+		try{	
+			super.verifica_movimento(vetor,tab);
+			if (tabuleiro[vetor[0]][vetor[1]]!=null) {//verifica se o espaço está vazio para ir
+				throw new MovimentoInvalido();
+			}
+		}//verifica se está nos limites do tabuleiro
+		catch(MovimentoInvalido erro) {
+			throw new MovimentoInvalido();
 		}
-		return true;
+		
+		
 	}
 	
 	public void move() {//retorna o vetor de posições {linha,coluna} para movimentação
 		
 		int[] vetor= random_positions();
-		while(verifica_movimento(vetor)==false) {
-			vetor=random_positions();
+		while(true) {
+			try{verifica_movimento(vetor);
+				break;
+			}
+			catch(MovimentoInvalido erro) {
+				vetor=random_positions();
+			}
+			
 		}
 		
 		tabuleiro[linha][coluna]=null;

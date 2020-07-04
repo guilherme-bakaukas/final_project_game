@@ -24,34 +24,58 @@ public class Usuario extends Peca implements ActionListener {
 			
 			if (event.getSource()==right) {
 				vetor[1]++;
-				if (verifica_movimento(vetor)==true) {
+				try{verifica_movimento(vetor);
 					tabuleiro[linha][coluna]=null;
 					this.coluna++;
 					this.move();
 				}
+				catch(MovimentoInvalido erro) {
+					System.out.println(erro.getMessage());
+				}
+				catch (Exception erro) {
+					   System.out.println("Outro erro: " + erro.getMessage());
+				}
 			}
 			else if (event.getSource()==left) {
 				vetor[1]--;
-				if (verifica_movimento(vetor)==true) {
+				try {verifica_movimento(vetor);
 					tabuleiro[linha][coluna]=null;
 					this.coluna--;
 					this.move();
 				}
+				catch(MovimentoInvalido erro) {
+					System.out.println(erro.getMessage());
+				}
+				catch (Exception erro) {
+					   System.out.println("Outro erro: " + erro.getMessage());
+				}
 			}
 			else if (event.getSource()==up) {	
 				vetor[0]--;
-				if (verifica_movimento(vetor)==true) {
+				try {verifica_movimento(vetor);
 					tabuleiro[linha][coluna]=null;
 					this.linha--;
 					this.move();
 				}
+				catch(MovimentoInvalido erro) {
+					System.out.println(erro.getMessage());
+				}
+				catch (Exception erro) {
+					   System.out.println("Outro erro: " + erro.getMessage());
+				}
 			}
 			else if (event.getSource()==down) {
 				vetor[0]++;
-				if (verifica_movimento(vetor)==true) {
+				try{verifica_movimento(vetor);
 					tabuleiro[linha][coluna]=null;
 					this.linha++;
 					this.move();
+				}
+				catch(MovimentoInvalido erro) {
+					System.out.println(erro.getMessage());
+				}
+				catch (Exception erro) {
+					   System.out.println("Outro erro: " + erro.getMessage());
 				}
 			}
 			
@@ -109,30 +133,37 @@ public class Usuario extends Peca implements ActionListener {
 		
 	}
 	
-	private boolean verifica_movimento(int[] vetor) {
-		if (super.verifica_movimento(vetor, tab)==false) return false;//indica uma posição inexistente no tabuleiro
-		if (tabuleiro[vetor[0]][vetor[1]]!=null) {//posição ocupada
-			switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
-			case 'a':
-				this.setmoved(true);//pegou atividade e deverá ficar sem movimentar por duas rodadas
-				break;
-			case 'c':
-				this.moved=true;
-				tab.die();//usuario morre
-				break;
-			case 'v':
-				tabuleiro[vetor[0]][vetor[1]].move();//é movimentado na rodada seguinte
-				tabuleiro[vetor[0]][vetor[1]]=null;
-				tab.atualizar_pontuation();//atualiza o painel de pontuação
-				break;
-			case 'u':
-				return false;//não poderia se movimentar caso haja unicamp ou doente na posição requerida
-			case 'd':
-				return false;
+	private void verifica_movimento(int[] vetor) throws MovimentoInvalido {
+		try{super.verifica_movimento(vetor, tab);
+			if (tabuleiro[vetor[0]][vetor[1]]!=null) {//posição ocupada
+				switch (tabuleiro[vetor[0]][vetor[1]].getname()) {
+					case 'a':
+						this.setmoved(true);//pegou atividade e deverá ficar sem movimentar por duas rodadas
+						break;
+					case 'c':
+						this.moved=true;
+						tab.die();//usuario morre
+						break;
+					case 'v':
+						tabuleiro[vetor[0]][vetor[1]].move();//é movimentado na rodada seguinte
+						tabuleiro[vetor[0]][vetor[1]]=null;
+						tab.atualizar_pontuation();//atualiza o painel de pontuação
+						break;
+					case 'u':
+					case 'd':
+						throw new ColisaoPersonagens();//não poderia se movimentar caso haja unicamp ou doente na posição requerida
 			}
 		}
-		return true;
 		
+		}//indica uma posição inexistente no tabuleiro
+		catch(ColisaoPersonagens erro) {
+			throw new ColisaoPersonagens();
+		}
+		catch(MovimentoInvalido erro) {
+			throw new MovimentoInvalido();
+		}
+		
+
 	}
 
 
