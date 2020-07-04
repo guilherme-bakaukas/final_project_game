@@ -1,5 +1,7 @@
 # Projeto EaD Corona Run
 
+![Banner Apresentacao](Banner.png)
+
 # Equipe
 * Vitor Rodrigues Pietrobom - 245584
 * Guilherme Tezoli Bakaukas - 217332
