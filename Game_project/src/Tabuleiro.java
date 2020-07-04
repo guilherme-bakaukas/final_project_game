@@ -36,6 +36,10 @@ public class Tabuleiro implements ActionListener {
 
 	private String vitor_atividade;
 
+	private int seconds;
+
+	private int probabilidade;
+
 	
 
 	public Tabuleiro(Janela janela, int linha, int coluna) {//cria o layout com seu tamanho
@@ -52,9 +56,9 @@ public class Tabuleiro implements ActionListener {
         
 	}
 	
-	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina) {
+	public void create_tabuleiro(String ambiente, String unicamp, Usuario usuario,String corona, String atividade, String doente,String vacina, int probabilidade,int seconds) {
 		//tabuleiro em seu estado inicial
-		
+		this.seconds=seconds;
 		this.ambiente=ambiente;//vincular as classes e imagens do cenário ao tabuleiro
 		this.usuario=usuario;
 		this.unicamp=unicamp;
@@ -67,7 +71,7 @@ public class Tabuleiro implements ActionListener {
 		for (int l=0;l<this.linha;l++) {
 			for (int c=0;c<this.coluna;c++) {
 				if (l==0 & c==0) {
-					tabuleiro[l][c]= new Unicamp(unicamp,atividade);//passamos a referencia da imagem da atividade para a criação da atividade
+					tabuleiro[l][c]= new Unicamp(unicamp,atividade,probabilidade);//passamos a referencia da imagem da atividade para a criação da atividade
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else if (l==this.linha-1 & c==this.coluna-1) {
@@ -76,7 +80,7 @@ public class Tabuleiro implements ActionListener {
 					this.rodadas=0;//variável para contabilizar as rodadas em que o usuario está sem poder jogar
 				}
 				else if (l==0 & c==this.coluna-1) {
-					tabuleiro[l][c]=new Doente(doente,corona);
+					tabuleiro[l][c]=new Doente(doente,corona,probabilidade);
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
 				else if (l==5 & c==5) {
@@ -94,8 +98,9 @@ public class Tabuleiro implements ActionListener {
 	
 	
 	public void start() {
-		timer=new Timer(700,this);
+		timer=new Timer(this.seconds,this);
 		timer.start();
+		
 	}
 	
 	

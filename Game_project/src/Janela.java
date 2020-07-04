@@ -20,11 +20,6 @@ import javax.swing.SwingUtilities;
 public class Janela extends JFrame implements ActionListener{
 	private static final long serialVersionUID=7686762169698416749L;
 	
-	private JPanel controlPane1;
-	private JPanel controlPane2;
-	private JPanel buttonPane;
-	private JPanel startPane;
-	
 	private Tabuleiro tabuleiro;
 	
 	public Container principalPane;
@@ -48,21 +43,31 @@ public class Janela extends JFrame implements ActionListener{
 	private JButton player1;
 	private JButton player2;
 	private JButton next;
-
-	private JPanel pontuationPane;
-	private int points;
-
-	private JPanel panelPontuation;
-	private JLabel labelPontuation;
-
-	private JLabel label_text;
-
-	private JPanel panel_text;
-
-	private JPanel painel_personagens;
-
-
+	private JButton start;
+	private JButton hard;
+	private JButton medium;
+	private JButton easy;
 	
+	private JLabel labelPontuation;
+	private JLabel label_text;
+	private JLabel label_dificuldade;
+	
+	private JPanel panel_text;
+	private JPanel painel_personagens;
+	private JPanel panel_dificuldade;
+	private JPanel tryPane;
+	private JPanel controlPane1;
+	private JPanel controlPane2;
+	private JPanel buttonPane;
+	private JPanel startPane;
+	private JPanel panelPontuation;
+
+	private int seconds;
+	private int points;
+	private int probabilidade;
+
+	private boolean player_defined;
+	private boolean dificuldade_defined;
 	
 	public Janela(){
 		
@@ -97,9 +102,11 @@ public class Janela extends JFrame implements ActionListener{
 	    SwingUtilities.updateComponentTreeUI(this);
 	}
 	
-	public void set_painel_inicial(String player1_gui, String player2_vitor) {
+	public void set_painel_inicial(String player1_gui, String player2_vitor) {//prepara o painel inicial, sem adicioná-los ao contanier principal
+		
 		this.player1_gui=player1_gui;
 		this.player2_vitor=player2_vitor;
+		
 		panel_text = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		label_text = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE O SEU PERSONAGEM:"+"</span></html>");
 		panel_text.add(label_text);
@@ -121,15 +128,42 @@ public class Janela extends JFrame implements ActionListener{
 	    
 	    painel_personagens = new JPanel();
 	    painel_personagens.setLayout(new FlowLayout(FlowLayout.CENTER));
+	    
+	    painel_personagens.add(panel_text);
 	    painel_personagens.add(player1);
 	    painel_personagens.add(player2);
+	    
+	    panel_dificuldade=new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    label_dificuldade = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE A DIFICULDADE:"+"</span></html>");
+	    panel_dificuldade.add(label_dificuldade);
+	    
+	    hard=new JButton("difícil");
+	    medium=new JButton("médio");
+	    easy=new JButton("fácil");
+	    
+	    hard.addActionListener(this);
+	    medium.addActionListener(this);
+	    easy.addActionListener(this);
+	    
+	    panel_dificuldade.add(hard);
+	    panel_dificuldade.add(medium);
+	    panel_dificuldade.add(easy);
+	    
+	    startPane=new JPanel();
+	    start=new JButton("start");
+	    start.addActionListener(this);
+	    startPane.add(start);
+	    
 		
 	}
 	
 	public void painel_inicial() {
 		
-		principalPane.add(panel_text, BorderLayout.NORTH);
-	    principalPane.add(painel_personagens,BorderLayout.CENTER);    
+	    principalPane.add(painel_personagens,BorderLayout.CENTER); 
+	    principalPane.add(panel_dificuldade,BorderLayout.NORTH);
+	    principalPane.add(startPane,BorderLayout.SOUTH); 
+		points=0;//zera a pontuação para o início do jogo
+		setPanels_game();//cria os paineis do jogo (tabuleiro, painel dos botões de controle e painel da pontuação)
 	    SwingUtilities.updateComponentTreeUI(this);
 	}
 
@@ -179,14 +213,12 @@ public class Janela extends JFrame implements ActionListener{
 		panelPontuation.add(labelPontuation);
 		principalPane.add(panelPontuation, BorderLayout.NORTH);
 		
-		startPane = new JPanel();
-		
+		tryPane = new JPanel();
 		try_again=new JButton("Try again");
 		try_again.addActionListener(this);
+		tryPane.add(try_again);
 		
-		startPane.add(try_again);
-		
-		principalPane.add(startPane,BorderLayout.SOUTH);//adicionado o botão para reiniciar o jogo
+		principalPane.add(tryPane,BorderLayout.SOUTH);//adicionado o botão para reiniciar o jogo
 		
 		SwingUtilities.updateComponentTreeUI(this);
 		
@@ -198,24 +230,40 @@ public class Janela extends JFrame implements ActionListener{
 		if (e.getSource()==try_again) {//caso o usuario queira jogar novamente e pressione o botao try again
 			principalPane.removeAll();
 			this.painel_inicial();//retorna ao painel de escolha do personagem
+			set_defined();//redefine player_defined e dificuldade_defined para falso
 		}
 		else if (e.getSource()==player1) {//escolha do personagem gui
-			points=0;//zera a pontuação para o início do jogo
-			setPanels_game();
 			setButtons_player(player1_gui,gui_atividade);
-			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente, vacina);
-			tabuleiro.start();//inicia o jogo
+			player_defined=true;
 		}
 		else if (e.getSource()==player2) {//escolha do personagem vitor
-			points=0;//zera a pontuação para o inicio do jogo
-			setPanels_game();
 			setButtons_player(player2_vitor,vitor_atividade);
-			tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente, vacina);
-			tabuleiro.start();//inicia o jogo
+			player_defined=true;
 		}
 		else if (e.getSource()==next) {
 			principalPane.removeAll();
 			this.painel_inicial();
+			set_defined();//redefine player_defined e dificuldade_defined para falso
+		}
+		else if (e.getSource()==start) {
+			if (player_defined==true & dificuldade_defined==true) {
+				start();//inicia o jogo
+			}
+		}
+		else if (e.getSource()==hard) {
+			this.seconds=500;
+			this.probabilidade=45;
+			dificuldade_defined=true;
+		}
+		else if (e.getSource()==medium) {
+			this.seconds=750;
+			this.probabilidade=35;
+			dificuldade_defined=true;
+		}
+		else if (e.getSource()==easy) {
+			this.seconds=1000;
+			this.probabilidade=30;
+			dificuldade_defined=true;
 		}
 		
 		SwingUtilities.updateComponentTreeUI(this);
@@ -223,8 +271,24 @@ public class Janela extends JFrame implements ActionListener{
 		
 	}
 	
+	private void start() {
+		
+		principalPane.removeAll();
+		principalPane.add(tabuleiro.imagePane,BorderLayout.CENTER);//adiciona os paineis já prontos
+		principalPane.add(panelPontuation, BorderLayout.NORTH);
+        principalPane.add(buttonPane,BorderLayout.SOUTH);
+        
+        tabuleiro.create_tabuleiro(arquivo, unicamp , usuario, corona, atividade, doente, vacina, probabilidade,seconds);
+        tabuleiro.start();//inicia o jogo
+		
+	}
+
 	private void setButtons_player(String player, String player_atividade) {//vicula o usuario aos botoes
-    	JButton up=new JButton("up");
+    		 	
+		controlPane1.removeAll();
+		controlPane2.removeAll();
+
+		JButton up=new JButton("up");
     	this.setButtonUp(up);
     	
     	JButton left=new JButton("left");
@@ -235,7 +299,7 @@ public class Janela extends JFrame implements ActionListener{
     	
     	JButton right=new JButton("right");
     	this.setButton(right);
-    		 	
+		
 		usuario = new Usuario(player, player_atividade);//vincula o usuario ao personagem escolhido
 		
 		usuario.vinculateButtons(up, right, left, down);
@@ -248,19 +312,14 @@ public class Janela extends JFrame implements ActionListener{
 	
 	public void setPanels_game() {//cria o layout do tabuleiro e o painel de controle (onde haverá os botões de controle do personagem)
 		
-		principalPane.removeAll();
-		
         tabuleiro= new Tabuleiro(this,10,15);// painel das imagens
-        principalPane.add(tabuleiro.imagePane,BorderLayout.CENTER);
         
 		panelPontuation = new JPanel(new FlowLayout(FlowLayout.CENTER));//painel da pontuação
 		labelPontuation = new JLabel("<html><span style='font-size:20px'>"+"Pontuação: "+ points+"</span></html>");
 		panelPontuation.add(labelPontuation);
-		principalPane.add(panelPontuation, BorderLayout.NORTH);
         
         buttonPane=new JPanel();//painel de controle
         buttonPane.setLayout(new BorderLayout());
-        principalPane.add(buttonPane,BorderLayout.SOUTH);
         
         controlPane1=new JPanel();//painel de controle
         controlPane1.setLayout(new FlowLayout());
@@ -269,7 +328,15 @@ public class Janela extends JFrame implements ActionListener{
         controlPane2=new JPanel();//painel de controle
         controlPane2.setLayout(new FlowLayout());
         buttonPane.add(controlPane2,BorderLayout.SOUTH);
+        
 	}
+	
+	public void set_defined() {
+		this.player_defined=false;
+		this.dificuldade_defined=false;
+	}
+	
+	
 	
 }
 

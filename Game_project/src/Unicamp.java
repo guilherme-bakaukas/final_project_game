@@ -8,11 +8,12 @@ public class Unicamp extends PecasGeradoras {
 	
 	private String atividade;
 	
-	public Unicamp(String image, String atividade) {
+	public Unicamp(String image, String atividade, int probabilidade) {
 		this.name='u';
 		this.moved=false;
 		this.atividade=atividade;
 		this.image=image;
+		this.probabilidade=probabilidade;
 	}
 	
 	public char getname() {
@@ -48,7 +49,7 @@ public class Unicamp extends PecasGeradoras {
 	
 	private void verifica_atividade() {
 		int num=new Random().nextInt(100 + 1);
-		if (num<=35) {//chance de 30% de criar atividade
+		if (num<=this.probabilidade) {//chance de criar atividade
 			this.create_atividade();
 		}	
 	}

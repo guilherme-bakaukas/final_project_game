@@ -2,15 +2,14 @@ import java.util.Random;
 
 public class Doente extends PecasGeradoras {
 	
-	
 	private String corona;
 
-
-	public Doente(String image, String corona) {
+	public Doente(String image, String corona, int probabilidade) {
 		this.name='d';
 		this.moved=false;
 		this.corona=corona;
 		this.image=image;
+		this.probabilidade=probabilidade;
 	}
 
 	@Override
@@ -40,7 +39,7 @@ public class Doente extends PecasGeradoras {
 
 	private void verifica_corona() {
 		int num=new Random().nextInt(100 + 1);
-		if (num<=30) {//chance de 30% de criar corona
+		if (num<=this.probabilidade) {//chance de 30% de criar corona
 			this.create_corona();
 		}
 		

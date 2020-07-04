@@ -117,6 +117,7 @@ public class Usuario extends Peca implements ActionListener {
 				this.setmoved(true);//pegou atividade e deverá ficar sem movimentar por duas rodadas
 				break;
 			case 'c':
+				this.moved=true;
 				tab.die();//usuario morre
 				break;
 			case 'v':

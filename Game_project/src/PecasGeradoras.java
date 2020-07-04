@@ -1,6 +1,7 @@
 
 public abstract class PecasGeradoras extends Peca {
 	
+	protected int probabilidade;
 	protected Tabuleiro tab;
 	protected IPeca[][] tabuleiro;
 	protected boolean moved;
