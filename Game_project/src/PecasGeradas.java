@@ -36,7 +36,7 @@ public abstract class PecasGeradas extends Peca {
 			}
 			
 		}
-		catch(MovimentoInvalido erro) {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente
+		catch(SairTabuleiro erro) {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente
 			tabuleiro[this.linha][this.coluna]=null;//a peça some
 		}
 		catch(Exception erro) {//caso a peça esteja no limite do tabuleiro em direção a uma posição inexistente

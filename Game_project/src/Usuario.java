@@ -159,8 +159,8 @@ public class Usuario extends Peca implements ActionListener {
 		catch(ColisaoJogador erro) {
 			throw new ColisaoJogador();
 		}
-		catch(MovimentoInvalido erro) {
-			throw new MovimentoInvalido();
+		catch(SairTabuleiro erro) {
+			throw new SairTabuleiro();
 		}
 		catch (Exception erro) {
 			   System.out.println("Outro erro: " + erro.getMessage());

@@ -10,12 +10,16 @@ public abstract class PecasGeradoras extends Peca {
 		try{	
 			super.verifica_movimento(vetor,tab);
 			if (tabuleiro[vetor[0]][vetor[1]]!=null) {//verifica se o espaço está vazio para ir
-				throw new MovimentoInvalido();
+				throw new ColisaoInvalida();
 			}
 		}//verifica se está nos limites do tabuleiro
-		catch(MovimentoInvalido erro) {
-			throw new MovimentoInvalido();
+		catch(SairTabuleiro erro) {
+			throw new SairTabuleiro();
 		}
+		catch(ColisaoInvalida erro) {
+			throw new ColisaoInvalida();
+		}
+		
 		catch (Exception erro) {
 			   System.out.println("Outro erro: " + erro.getMessage());
 		}

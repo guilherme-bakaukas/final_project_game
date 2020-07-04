@@ -18,12 +18,12 @@ public abstract class Peca implements IPeca {
 		return vetor;
 	}
 	
-	public void verifica_movimento(int[] vetor, Tabuleiro tab) throws MovimentoInvalido {//verifica se as posições se encaixam com o tabuleiro
+	public void verifica_movimento(int[] vetor, Tabuleiro tab) throws SairTabuleiro {//verifica se as posições se encaixam com o tabuleiro
 		if ((vetor[0])>=tab.linha || (vetor[0])<0) {
-			throw new MovimentoInvalido();
+			throw new SairTabuleiro();
 		}
 		if ((vetor[1])>=tab.coluna || (vetor[1]<0)) {
-			throw new MovimentoInvalido();
+			throw new SairTabuleiro();
 		}
 	}
 	
