@@ -1,8 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.FlowLayout; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,9 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class Janela extends JFrame implements ActionListener{
@@ -74,7 +70,7 @@ public class Janela extends JFrame implements ActionListener{
 		
         super();
         setDefaultCloseOperation(EXIT_ON_CLOSE);//garante que a janela só fecha quando o usuário clica no exit
-        setSize(300,300);
+        setSize(700,500);
         
         
         principalPane= getContentPane();//painel principal
@@ -171,13 +167,7 @@ public class Janela extends JFrame implements ActionListener{
 	    SwingUtilities.updateComponentTreeUI(this);
 	}
 
-    public void setButtonUp(JButton botao) {// inserir botao up no painel de cima
-    	controlPane1.add(botao);
-	}
-    public void setButton(JButton botao) {//inserir os demais botões no painel
-    	controlPane2.add(botao);
-    }
-
+    
 	public void setAmbiente(String arquivo, String unicamp, String corona, String atividade, String doente,String vacina, String caixao,String gui_atividade,String vitor_atividade, String instrucoes) {
 		//vicula as imagens a essa classe
 		this.arquivo=arquivo;
@@ -233,18 +223,27 @@ public class Janela extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if (e.getSource()==try_again) {//caso o usuario queira jogar novamente e pressione o botao try again
 			principalPane.removeAll();
+			setcolors_dificuldade();
+			setcolors_personagens();
 			this.painel_inicial();//retorna ao painel de escolha do personagem
 			set_defined();//redefine player_defined e dificuldade_defined para falso
+			
 		}
 		else if (e.getSource()==player1) {//escolha do personagem gui
+			player2.setBackground(Color.lightGray);
+			player1.setBackground(Color.green);
 			setButtons_player(player1_gui,gui_atividade);
 			player_defined=true;
 		}
 		else if (e.getSource()==player2) {//escolha do personagem vitor
+			player1.setBackground(Color.lightGray);
+			player2.setBackground(Color.green);
 			setButtons_player(player2_vitor,vitor_atividade);
 			player_defined=true;
 		}
 		else if (e.getSource()==next) {
+			setcolors_dificuldade();
+			setcolors_personagens();
 			principalPane.removeAll();
 			this.painel_inicial();
 			set_defined();//redefine player_defined e dificuldade_defined para falso
@@ -255,21 +254,29 @@ public class Janela extends JFrame implements ActionListener{
 			}
 		}
 		else if (e.getSource()==insane) {
+			setcolors_dificuldade();
+			insane.setBackground(Color.green);
 			this.seconds=100;
 			this.probabilidade=95;
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==hard) {
+			setcolors_dificuldade();
+			hard.setBackground(Color.green);
 			this.seconds=250;
 			this.probabilidade=80;
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==medium) {
+			setcolors_dificuldade();
+			medium.setBackground(Color.green);
 			this.seconds=500;
 			this.probabilidade=50;
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==easy) {
+			setcolors_dificuldade();
+			easy.setBackground(Color.green);
 			this.seconds=1000;
 			this.probabilidade=30;
 			dificuldade_defined=true;
@@ -280,6 +287,22 @@ public class Janela extends JFrame implements ActionListener{
 		
 	}
 	
+	private void setcolors_personagens() {
+		
+		player1.setBackground(Color.lightGray);
+		player2.setBackground(Color.lightGray);
+		
+	}
+
+	private void setcolors_dificuldade() {
+		
+		insane.setBackground(Color.lightGray);
+		hard.setBackground(Color.lightGray);
+		medium.setBackground(Color.lightGray);
+		easy.setBackground(Color.lightGray);
+		
+	}
+
 	private void start() {
 		
 		principalPane.removeAll();
@@ -298,16 +321,16 @@ public class Janela extends JFrame implements ActionListener{
 		controlPane2.removeAll();
 
 		JButton up=new JButton("up");
-    	this.setButtonUp(up);
+    	controlPane1.add(up);
     	
     	JButton left=new JButton("left");
-    	this.setButton(left);
+    	controlPane2.add(left);
 		
     	JButton down=new JButton("down");
-    	this.setButton(down);
+    	controlPane2.add(down);
     	
     	JButton right=new JButton("right");
-    	this.setButton(right);
+    	controlPane2.add(right);
 		
 		usuario = new Usuario(player, player_atividade);//vincula o usuario ao personagem escolhido
 		
