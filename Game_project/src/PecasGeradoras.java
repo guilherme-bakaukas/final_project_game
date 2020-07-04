@@ -16,6 +16,9 @@ public abstract class PecasGeradoras extends Peca {
 		catch(MovimentoInvalido erro) {
 			throw new MovimentoInvalido();
 		}
+		catch (Exception erro) {
+			   System.out.println("Outro erro: " + erro.getMessage());
+		}
 		
 		
 	}
@@ -29,6 +32,9 @@ public abstract class PecasGeradoras extends Peca {
 			}
 			catch(MovimentoInvalido erro) {
 				vetor=random_positions();
+			}
+			catch (Exception erro) {
+				   System.out.println("Outro erro: " + erro.getMessage());
 			}
 			
 		}

@@ -151,16 +151,19 @@ public class Usuario extends Peca implements ActionListener {
 						break;
 					case 'u':
 					case 'd':
-						throw new ColisaoPersonagens();//não poderia se movimentar caso haja unicamp ou doente na posição requerida
+						throw new ColisaoJogador();//não poderia se movimentar caso haja unicamp ou doente na posição requerida
 			}
 		}
 		
 		}//indica uma posição inexistente no tabuleiro
-		catch(ColisaoPersonagens erro) {
-			throw new ColisaoPersonagens();
+		catch(ColisaoJogador erro) {
+			throw new ColisaoJogador();
 		}
 		catch(MovimentoInvalido erro) {
 			throw new MovimentoInvalido();
+		}
+		catch (Exception erro) {
+			   System.out.println("Outro erro: " + erro.getMessage());
 		}
 		
 
