@@ -128,6 +128,24 @@ public interface IDataSet extends ITableProducer, IDataSetProperties {
 }
 ~~~
 
+# Componente Tabuleiro
+
+![Componente](Jogador.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FJogador.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Gerir as peças e seus movimentos
+Interface | -
+
+
 # Componente Jogador
 
 ![Componente](Jogador.PNG)
