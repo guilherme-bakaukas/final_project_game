@@ -79,7 +79,8 @@ O vídeo a seguir apresenta um detalhamento de um projeto baseado em componentes
 
 ## Diagrama Geral do Projeto
 
-> <Apresente um diagrama geral de organização da organização do seu sistema. O formato é livre. A escolha de um ou mais estilos arquiteturais será considerado um diferencial.>
+![Diagrama Geral](./assets/DiagramaGeral.png)
+
 
 > <Faça uma breve descrição do diagrama.>
 
