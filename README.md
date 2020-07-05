@@ -131,13 +131,13 @@ public void algoInteressante(…) {
 Em conclusão, concordamos que o jogo acabou por ser bem divertido e desafiador quando se olha para as dificuldades mais avançadas. 
 
 Aprendemos muito durante o desenvolvimento do projeto, e isso trouxe consigo inúmeras ideias para melhorias possíveis:
-	* Aplicar melhor os conceitos de interface, algo que usamos de forma simples e que talvez poderiamos ter explorado melhor
-	* Melhorar a organização dos pacotes, sub-dividindo mais o pacote principal e separando mais as coisas
-	* Dividir e organizar mais as coisas relacionadas com a interface gráfica, percebemos no final do projeto que juntar tudo num unico arquivo deixa as coisas bem confusas
-	* Implementar controles utilizando o teclado, já que o desempenho do jogador caí muito por ter que apertar nos botões pelo mouse
-	* Melhorar o método de movimentação das peças geradoras, uma vez que agora elas simplesmente se movem aleatóriamente e as vezes não geram um desafio
-	* Deixar o menu inicial de seleção mais bonito, algo que ficamos sem tempo de fazer e optamos por sua funcionalidade
-	* Adicionar possíveis buffs para o jogador coletar pelo mapa, como por exemplo alcool em gel que daría um escudo para o jogador.
+* Aplicar melhor os conceitos de interface, algo que usamos de forma simples e que talvez poderiamos ter explorado melhor
+* Melhorar a organização dos pacotes, sub-dividindo mais o pacote principal e separando mais as coisas
+* Dividir e organizar mais as coisas relacionadas com a interface gráfica, percebemos no final do projeto que juntar tudo num unico arquivo deixa as coisas bem confusas
+* Implementar controles utilizando o teclado, já que o desempenho do jogador caí muito por ter que apertar nos botões pelo mouse
+* Melhorar o método de movimentação das peças geradoras, uma vez que agora elas simplesmente se movem aleatóriamente e as vezes não geram um desafio
+* Deixar o menu inicial de seleção mais bonito, algo que ficamos sem tempo de fazer e optamos por sua funcionalidade
+* Adicionar possíveis buffs para o jogador coletar pelo mapa, como por exemplo alcool em gel que daría um escudo para o jogador.
 	
 	
 
