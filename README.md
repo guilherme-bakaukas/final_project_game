@@ -98,12 +98,76 @@ else if (e.getSource()==insane) {
 # Destaques de Código
 
 > <Escolha trechos relevantes e/ou de destaque do seu código. Apresente um recorte (você pode usar reticências para remover partes menos importantes). Veja como foi usado o highlight de Java para o código.>
-
+* Dividimos o jogo em rodadas e utilizamos um timer para definir o tempo entre estas rodadas
 ~~~java
-// Recorte do seu código
-public void algoInteressante(…) {
-   …
-   trechoInteressante = 100;
+public void start() {//inicia a movimentação automática das peças do tabuleiro
+	timer=new Timer(this.seconds,this);
+	timer.start();
+		
+}
+~~~
+* A variavel seconds utilizada pelo timer é definida pela dificuldade escolhida:
+~~~java
+else if (e.getSource()==insane) {
+	...
+	this.seconds=100;//segundos do timer (100ms para cada rodada do tabuleiro)
+	...
+}
+else if (e.getSource()==hard) {
+	...
+	this.seconds=250;//segundos do timer (250ms para cada rodada do tabuleiro)
+	...
+}
+else if (e.getSource()==medium) {
+	...
+	this.seconds=500;//segundos do timer (500ms para cada rodada do tabuleiro)
+	...
+}
+else if (e.getSource()==easy) {
+	...
+	this.seconds=1000;//segundos do timer (1000ms para cada rodada do tabuleiro)
+	...
+}
+~~~
+* Quando o jogador morre paramos o timer
+~~~java
+public void die() {//para o timer no momento da morte do usuario
+		timer.stop();
+		janela.stop();
+}
+~~~
+
+* Usamos bastante aleatoriedade no jogo, os códigos abaixo são utilizados para realizar a geração dos coronas e das atividades 
+~~~java
+private void verifica_atividade() {
+		int num=new Random().nextInt(100 + 1);
+		if (num<=this.probabilidade) {//chance de criar atividade
+			this.create_atividade();
+		}	
+}
+~~~
+~~~java
+private void verifica_corona() {
+		int num=new Random().nextInt(100 + 1);
+		if (num<=this.probabilidade) {//chance de 30% de criar corona
+			this.create_corona();
+		}	
+}
+~~~
+* Já este, também utilizando a aleatoriedade, é utilizado para controlar a geração das vacinas no tabuleiro, as quais aparecem sempre em um lugar aleatório e vazio
+~~~java
+public void move() {
+	while(true) {
+		random_linha=new Random().nextInt(tab.linha);
+		random_coluna=new Random().nextInt(tab.coluna);
+		if (tabuleiro[random_linha][random_coluna]==null) {//encontramos uma espaço vazio aleatorio e colocamos a vacina
+			tabuleiro[random_linha][random_coluna]=this;
+			this.linha=random_linha;
+			this.coluna=random_coluna;
+			break;
+		}
+	}
+
 }
 ~~~
 
