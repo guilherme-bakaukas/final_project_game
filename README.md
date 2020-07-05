@@ -27,10 +27,10 @@ Existem quatro dificuldades dentro do jogo: Fácil, Médio, Difícil e Insano. A
 # Slides do Projeto
 
 ## Slides da Prévia
-
+https://docs.google.com/presentation/d/1fUZfoY9JIpWLPM-qJGqlJ5vaUU4FleUiWPCXX1pUDvo/edit?usp=sharing
 
 ## Slides da Apresentação Final
-
+https://docs.google.com/presentation/d/1oAty8V_aL1AnFBKm4JpLDEH-U4iHk4urpDeWfbsRWWY/edit?usp=sharing
 
 ## Relatório de Evolução
 
