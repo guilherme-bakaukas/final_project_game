@@ -223,13 +223,13 @@ Todas as peças no jogo implementam a interface IPeca. A classe Vacina implement
 
 # Componente Tabuleiro
 
-![Componente](Jogador.PNG)
+![Componente Tabuleiro](./assets/Comps/TabuleiroComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FJogador.PNG)
+![Diagrama Tabuleiro](./assets/IntComps/IntTabuleiro.png)
 
 Campo | Valor
 ----- | -----
@@ -241,13 +241,13 @@ Interface | -
 
 # Componente Usuario
 
-![Componente](Jogador.PNG)
+![Componente Usuario](./assets/Comps/UsuarioComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FJogador.PNG)
+![Diagrama Usuario](./assets/IntComps/IntUsuario.png)
 
 Campo | Valor
 ----- | -----
@@ -258,13 +258,13 @@ Interface | IPeca
 
 # Componente Vacina
 
-![Componente](Vacina.PNG)
+![Componente Vacina](./assets/Comps/VacinaComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FVacina.PNG)
+![Diagrama Vacina](./assets/IntComps/IntVacina.png)
 
 Campo | Valor
 ----- | -----
@@ -275,13 +275,12 @@ Interface | IPeca
 
 # Componente Corona
 
-![Componente](Covid.PNG)
-
+![Componente Corona](./assets/Comps/CoronaComp.png)
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FCovid.PNG)
+![Diagrama Corona](./assets/IntComps/IntCorona.png)
 
 Campo | Valor
 ----- | -----
@@ -292,13 +291,13 @@ Interface | IPeca
 
 # Componente Doente
 
-![Componente](Doente.PNG)
+![Componente Doente](./assets/Comps/DoenteComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FDoente.PNG)
+![Diagrama Doente](./assets/IntComps/IntDoente.png)
 
 Campo | Valor
 ----- | -----
@@ -309,13 +308,13 @@ Interface | IPeca
 
 # Componente Atividade
 
-![Componente](Atividade.PNG)
+![Componente Atividade](./assets/Comps/AtividadeComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FAtividade.PNG)
+![Diagrama Atividade](./assets/IntComps/IntAtividade.png)
 
 Campo | Valor
 ----- | -----
@@ -326,13 +325,13 @@ Interface | IPeca
 
 # Componente Unicamp
 
-![Componente](Unicamp.PNG)
+![Componente Unicamp](./assets/Comps/UnicampComp.png)
 
 ## Interfaces
 
 Interfaces associadas a esse componente:
 
-![Diagrama Interfaces](FUnicamp.PNG)
+![Diagrama Unicamp](./assets/IntComps/IntUnicamp.png)
 
 Campo | Valor
 ----- | -----
