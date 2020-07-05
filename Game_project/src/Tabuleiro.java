@@ -74,7 +74,7 @@ public class Tabuleiro implements ActionListener {
 					tabuleiro[l][c]= new Unicamp(unicamp,atividade,probabilidade);//passamos a referencia da imagem da atividade para a criação da atividade
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 				}
-				else if (l==this.linha-1 & c==this.coluna-1) {
+				else if (l==this.linha-1 & c==this.coluna-1) {//usuário começa no final do tabuleiro
 					tabuleiro[l][c]= usuario;
 					tabuleiro[l][c].vinculate_tabuleiro(this);
 					this.rodadas=0;//variável para contabilizar as rodadas em que o usuario está sem poder jogar
@@ -97,7 +97,7 @@ public class Tabuleiro implements ActionListener {
 	}
 	
 	
-	public void start() {
+	public void start() {//inicia a movimentação automática das peças do tabuleiro
 		timer=new Timer(this.seconds,this);
 		timer.start();
 		
@@ -204,12 +204,12 @@ public class Tabuleiro implements ActionListener {
 		}
 		
 	}
-	public void atualizar_pontuation() {
+	public void atualizar_pontuation() {//atualiza o painel de pontuação
 		points++;
 		layout_tabuleiro();
 		janela.atualizar_pontuation(points);
 	}
-	public void atualizar_tabuleiro() {
+	public void atualizar_tabuleiro() {//atualiza o painel
 		janela.atualizar();
 	}
 	
@@ -219,7 +219,7 @@ public class Tabuleiro implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {//método chamado pelo timer
 		
 		//intercala a movimenação da criação das peças, para mantê-la parada no momento de gerar uma peça
 		

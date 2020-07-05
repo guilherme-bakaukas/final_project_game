@@ -128,7 +128,7 @@ public class Janela extends JFrame implements ActionListener{
 	    
 	    painel_personagens.add(panel_text);
 	    painel_personagens.add(player1);
-	    painel_personagens.add(player2);
+	    painel_personagens.add(player2);//prepara painel com o texto "escolha o seu personagem" e os botões com imagem dos dois personagens
 	    
 	    panel_dificuldade=new JPanel(new FlowLayout(FlowLayout.CENTER));
 	    label_dificuldade = new JLabel("<html><span style='font-size:15px'>"+"SELECIONE A DIFICULDADE:"+"</span></html>");
@@ -147,17 +147,17 @@ public class Janela extends JFrame implements ActionListener{
 	    panel_dificuldade.add(insane);
 	    panel_dificuldade.add(hard);
 	    panel_dificuldade.add(medium);
-	    panel_dificuldade.add(easy);
+	    panel_dificuldade.add(easy);//prepara o painel de dificuldade 
 	    
 	    startPane=new JPanel();
 	    start=new JButton("start");
 	    start.addActionListener(this);
-	    startPane.add(start);
+	    startPane.add(start);//prepara o painel do botão start
 	    
 		
 	}
 	
-	public void painel_inicial() {
+	public void painel_inicial() {//adiciona os paineis preparados no set_painel_inicial
 		
 	    principalPane.add(painel_personagens,BorderLayout.CENTER); 
 	    principalPane.add(panel_dificuldade,BorderLayout.NORTH);
@@ -183,7 +183,7 @@ public class Janela extends JFrame implements ActionListener{
 	}
 	
 	
-	public void atualizar_pontuation(int points) {//atualiza a pontuação
+	public void atualizar_pontuation(int points) {//atualiza o painel da pontuação ao pegar a vacina
 		this.points=points;
 		labelPontuation=new JLabel("<html><span style='font-size:20px'>"+"Pontuação: "+ points+"</span></html>");
 		panelPontuation.removeAll();
@@ -191,7 +191,7 @@ public class Janela extends JFrame implements ActionListener{
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 	
-	public void atualizar() {//atualiza o painel
+	public void atualizar() {//atualiza a janela
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 	
@@ -205,7 +205,7 @@ public class Janela extends JFrame implements ActionListener{
 		panelPontuation = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		labelPontuation = new JLabel("<html><span style='font-size:30px'>"+"Parabéns, sua pontuação foi de: "+ points + " vacinas"+"</span></html>");
 		panelPontuation.add(labelPontuation);
-		principalPane.add(panelPontuation, BorderLayout.NORTH);
+		principalPane.add(panelPontuation, BorderLayout.NORTH);//adicionado a mensagem dos pontos somados
 		
 		tryPane = new JPanel();
 		try_again=new JButton("Try again");
@@ -241,7 +241,7 @@ public class Janela extends JFrame implements ActionListener{
 			setButtons_player(player2_vitor,vitor_atividade);
 			player_defined=true;
 		}
-		else if (e.getSource()==next) {
+		else if (e.getSource()==next) {//ir para a seleção dos personagens e dificuldade
 			setcolors_dificuldade();
 			setcolors_personagens();
 			principalPane.removeAll();
@@ -250,14 +250,14 @@ public class Janela extends JFrame implements ActionListener{
 		}
 		else if (e.getSource()==start) {
 			if (player_defined==true & dificuldade_defined==true) {
-				start();//inicia o jogo
+				start();//inicia o jogo apenas se o usuário definir o personagem e o nível de dificuldade
 			}
 		}
 		else if (e.getSource()==insane) {
-			setcolors_dificuldade();
-			insane.setBackground(Color.green);
-			this.seconds=100;
-			this.probabilidade=95;
+			setcolors_dificuldade();//reseta os botões para cinza
+			insane.setBackground(Color.green);//botão selecionado fica verde
+			this.seconds=100;//segundos do timer (100ms para cada rodada do tabuleiro)
+			this.probabilidade=95;//probabilidade de gerar corona e atividade
 			dificuldade_defined=true;
 		}
 		else if (e.getSource()==hard) {
@@ -287,14 +287,14 @@ public class Janela extends JFrame implements ActionListener{
 		
 	}
 	
-	private void setcolors_personagens() {
+	private void setcolors_personagens() {//reseta os botões para cinza
 		
 		player1.setBackground(Color.lightGray);
 		player2.setBackground(Color.lightGray);
 		
 	}
 
-	private void setcolors_dificuldade() {
+	private void setcolors_dificuldade() {//reseta os botões para cinza
 		
 		insane.setBackground(Color.lightGray);
 		hard.setBackground(Color.lightGray);
@@ -317,7 +317,7 @@ public class Janela extends JFrame implements ActionListener{
 
 	private void setButtons_player(String player, String player_atividade) {//vicula o usuario aos botoes
     		 	
-		controlPane1.removeAll();
+		controlPane1.removeAll();//removemos os botões dos paineis
 		controlPane2.removeAll();
 
 		JButton up=new JButton("up");
@@ -334,7 +334,7 @@ public class Janela extends JFrame implements ActionListener{
 		
 		usuario = new Usuario(player, player_atividade);//vincula o usuario ao personagem escolhido
 		
-		usuario.vinculateButtons(up, right, left, down);
+		usuario.vinculateButtons(up, right, left, down);//criamos referência dos botões no usuário
 		
 		right.addActionListener(usuario);
 		left.addActionListener(usuario);
@@ -344,7 +344,7 @@ public class Janela extends JFrame implements ActionListener{
 	
 	public void setPanels_game() {//cria o layout do tabuleiro e o painel de controle (onde haverá os botões de controle do personagem)
 		
-        tabuleiro= new Tabuleiro(this,10,15);// painel das imagens
+        tabuleiro= new Tabuleiro(this,10,15);// painel do tabuleiro
         
 		panelPontuation = new JPanel(new FlowLayout(FlowLayout.CENTER));//painel da pontuação
 		labelPontuation = new JLabel("<html><span style='font-size:20px'>"+"Pontuação: "+ points+"</span></html>");
@@ -363,7 +363,7 @@ public class Janela extends JFrame implements ActionListener{
         
 	}
 	
-	public void set_defined() {
+	public void set_defined() {//reseta os defineds para outro jogo
 		this.player_defined=false;
 		this.dificuldade_defined=false;
 	}
