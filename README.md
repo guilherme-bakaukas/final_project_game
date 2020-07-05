@@ -54,7 +54,7 @@ public void move() {
 
 * Alteramos todas as artes do jogo para artes originais e que seguissem um estilo pixelado, criando uma uniformidade entre o jogo inteiro.
 
-![Unicamp pixelart](./assets/Unicamp.PNG)
+![Unicamp pixelart](./assets/Unicamp.PNG) ![Doente pixelart](./assets/Doente.PNG) ![Atividade pixelart](./assets/Atividade.PNG) ![Corona pixelart](./assets/Corona.png)
 
 * Decidimos criar a possibilidade do jogador escolher seu personagem, tendo como opções os membros do grupo.
 ![Player Vitor](./assets/VitorRaw.png) ![Player Gui](./assets/GuiRaw.png)
