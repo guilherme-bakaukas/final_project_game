@@ -215,55 +215,11 @@ Aprendemos muito durante o desenvolvimento do projeto, e isso trouxe consigo in�
 ![Diagrama Geral](./assets/DiagramaGeral.png)
 
 
-> <Faça uma breve descrição do diagrama.>
+Todas as peças no jogo implementam a interface IPeca. A classe Vacina implementa ela diretamente e a classe abstrata Peca também, desta última temos três herdeiras, sendo estas a classe abstrata PecasGeradoras, a classe abstrata PecasGeradas e a classe Usuario. Unicamp e Doente herdam a classe PecasGeradoras e o Corona e a Atividade herdam a classe PecasGeradas.
 
 ## Diagrama Geral de Componentes
 
-### Exemplo 1
 
-Este é o diagrama compondo componentes para análise:
-
-![Diagrama Analise](diagrama-componentes-analise.png)
-
-### Exemplo 2
-
-Este é um diagrama inicial do projeto de jogos:
-
-![Diagrama Jogos](diagrama-componentes-jogos.png)
-
-### Exemplo 3
-
-Este é outro diagrama de um projeto de vendas:
-
-![Diagrama Vendas](diagrama-componentes-vendas.png)
-
-Para cada componente será apresentado um documento conforme o modelo a seguir:
-
-## Componente `<Nome do Componente>`
-
-> <Resumo do papel do componente e serviços que ele oferece.>
-
-![Componente](diagrama-componente.png)
-
-**Ficha Técnica**
-item | detalhamento
------ | -----
-Classe | `<caminho completo da classe com pacotes>` <br> Exemplo: `pt.c08componentes.s20catalog.s10ds.DataSetComponent`
-Autores | `<nome dos membros que criaram o componente>`
-Interfaces | `<listagem das interfaces do componente>`
-
-### Interfaces
-
-Interfaces associadas a esse componente:
-
-![Diagrama Interfaces](diagrama-interfaces.png)
-
-Interface agregadora do componente em Java:
-
-~~~java
-public interface IDataSet extends ITableProducer, IDataSetProperties {
-}
-~~~
 
 # Componente Tabuleiro
 
@@ -348,7 +304,7 @@ Campo | Valor
 ----- | -----
 Classe | `Game_project.src.game.Doente`
 Autores | Vitor e Guilherme
-Objetivo | Representar o Doente
+Objetivo | Representar o Doente e gerir a geração de Coronas
 Interface | IPeca
 
 # Componente Atividade
@@ -382,7 +338,7 @@ Campo | Valor
 ----- | -----
 Classe |`Game_project.src.game.Unicamp`
 Autores | Vitor e Guilherme
-Objetivo | Representar a Unicamp
+Objetivo | Representar a Unicamp e gerir a geração de Atividades
 Interface | IPeca
 
 
