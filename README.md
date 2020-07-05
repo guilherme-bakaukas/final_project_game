@@ -64,36 +64,9 @@ Projeto em Java, preferencialmente em Eclipse, incluindo todos os arquivos de da
 
 Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc. Coloque os arquivos aqui (mesmo que você mantenha uma cópia no diretório do código).
 
-# Modelo para Apresentação do Projeto
-
-Este é um guia de como produzir documentação em Markdown. Para entender como criar documentos em Markdown no Github, veja o material/vídeo:
-[Guia de Uso do Markdown](https://github.com/mc-unicamp/oficinas/tree/master/docs).
-
-Vide detalhes sobre o Markdown em: [Mastering Markdown](https://guides.github.com/features/mastering-markdown/).
-
-E mais especificamente sobre tabelas em: [Organizing information with tables](https://help.github.com/en/articles/organizing-information-with-tables)
-
-Segue abaixo o modelo de como deve ser documentado o projeto e cada componente do projeto. Tudo o que for indicado entre `<...>` indica algo que deve ser substituído pelo indicado. No modelo são colocados exemplos ilustrativos, que serão substituídos pelos do seu projeto.
-
-Para a construção dos diagramas, devem ser usados modelos disponíveis em: [Diagramas de Classes, Interfaces e Componentes](https://docs.google.com/presentation/d/1ML3WrnDtzh-4wqLmdXN9au1TBIwEqo7TIbMLNOYSMAI/edit?usp=sharing)
-
-
-
-# Modelo para Apresentação do Projeto
-
-# Projeto EaD Corona Run
-
-# Equipe
-* Vitor Rodrigues Pietrobom - 245584
-* Guilherme Tezoli Bakaukas - 217332
-
-# Equipe
-* `<nome completo>` - `<RA>`
-
-# Vídeos do Projeto
 
 ## Vídeo da Prévia
-> <Coloque um link para o vídeo da prévia do projeto.>
+[![Video explicativo sobre o projeto](https://img.youtube.com/vi/https://youtu.be/el5MtHRGmbc/0.jpg)](https://youtu.be/el5MtHRGmbc)
 
 ## Vídeo do Jogo
 > <Coloque um link para o vídeo em que é demonstrada a versão final do jogo. Esse vídeo deve ter em torno de 5 minutos. Este vídeo não apresenta slides, nem substitui a apresentação final do projeto, que será feita por conferência. Ele mostra apenas o jogo em funcionamento.>
@@ -268,6 +241,7 @@ Método | Objetivo
 Classe | Descrição
 ----- | -----
 MovimentoInvalido | Engloba todos os movimentos invalidos
+SairTabuleiro | Indica que o movimento causaria a saída do tabuleiro
 ColisaoInvalida | Engloba todas as colisões invalidas
-ColisaoJogador | Indica colisão inválida do jogador com um personagem.
-ColisaoPersonagens | Indica colisao invalida da Unicamp e do Doente com outras instâncias.
+ColisaoJogador | Indica colisão inválida do jogador com um personagem
+
