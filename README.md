@@ -133,51 +133,28 @@ public interface IDataSet extends ITableProducer, IDataSetProperties {
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
+### Interface `IPeca`
 
-`<Resumo do papel da interface.>`
-
-~~~
-<Interface em Java.>
-~~~
-
-Método | Objetivo
--------| --------
-`<id do método em Java>` | `<objetivo do método e descrição dos parâmetros>`
-
-## Exemplo:
-
-### Interface `ITableProducer`
-
-Interface provida por qualquer fonte de dados que os forneça na forma de uma tabela.
+Interface provida por qualquer peça contida no jogo, incluindo o jogador, os personagens, os debuffs e a vacina.
 
 ~~~java
-public interface ITableProducer {
-  String[] requestAttributes();
-  String[][] requestInstances();
+public interface IPeca {
+	public char getname();
+	public boolean getmoved();
+	public void move();
+	public void setmoved(boolean b);
+	public void vinculate_tabuleiro(Tabuleiro tab);
 }
 ~~~
 
 Método | Objetivo
 -------| --------
-`requestAttributes` | Retorna um vetor com o nome de todos os atributos (colunas) da tabela.
-`requestInstances` | Retorna uma matriz em que cada linha representa uma instância e cada coluna o valor do respectivo atributo (a ordem dos atributos é a mesma daquela fornecida por `requestAttributes`.
+`getname` | Retorna o identificador da peça
+`getmoved` | Retorna o status de movimento da peça, podendo está ter se mexido ou não
+`move` | Realiza a movimentação da peça
+`setmoved` | Define seu status de movimentação
+`vinculate_tabuleiro` | Vincula o tabuleiro ao componente para realizar as mudanças de movimentação
 
-### Interface `IDataSetProperties`
-
-Define o recurso (usualmente o caminho para um arquivo em disco) que é a fonte de dados.
-
-~~~java
-public interface IDataSetProperties {
-  public String getDataSource();
-  public void setDataSource(String dataSource);
-}
-~~~
-
-Método | Objetivo
--------| --------
-`getDataSource` | Retorna o caminho da fonte de dados.
-`setDataSource` | Define o caminho da fonte de dados, informado através do parâmetro `dataSource`.
 
 # Plano de Exceções
 
