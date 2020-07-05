@@ -27,14 +27,12 @@ Existem quatro dificuldades dentro do jogo: Fácil, Médio, Difícil e Insano. A
 # Slides do Projeto
 
 ## Slides da Prévia
-`<Coloque um link para os slides da prévia do projeto.>`
+
 
 ## Slides da Apresentação Final
-`<Coloque um link para os slides da apresentação final do projeto.>`
+
 
 ## Relatório de Evolução
-
-> <Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.>
 
 * Depois de algumas iterações sobre o projeto percebemos que um jogo baseado em turnos não faria sentido, portanto, optamos por fazer um jogo mais fluido, na qual as peças se movimentam sem ordem fixa definida entre jogador e personagens.
 
@@ -99,7 +97,6 @@ else if (e.getSource()==insane) {
 
 # Destaques de Código
 
-> <Escolha trechos relevantes e/ou de destaque do seu código. Apresente um recorte (você pode usar reticências para remover partes menos importantes). Veja como foi usado o highlight de Java para o código.>
 * Dividimos o jogo em rodadas e utilizamos um timer para definir o tempo entre estas rodadas
 ~~~java
 public void start() {//inicia a movimentação automática das peças do tabuleiro
@@ -269,7 +266,6 @@ Utilizando este pattern, além da vantagem organizacional, temos a vantagem de q
 
 # Conclusões e Trabalhos Futuros
 
-> <Apresente aqui as conclusões do projeto e propostas de trabalho futuro. Esta é a oportunidade em que você pode indicar melhorias no projeto a partir de lições aprendidas e conhecimentos adquiridos durante a realização do projeto, mas que não puderam ser implementadas por questões de tempo. Por exemplo, há design patterns aprendidos no final do curso que provavelmente não puderam ser implementados no jogo -- este é o espaço onde você pode apresentar como aplicaria o pattern no futuro para melhorar o jogo.>
 
 Em conclusão, concordamos que o jogo acabou por ser bem divertido e desafiador quando se olha para as dificuldades mais avançadas. 
 
