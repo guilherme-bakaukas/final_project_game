@@ -149,7 +149,7 @@ private void verifica_atividade() {
 ~~~java
 private void verifica_corona() {
 		int num=new Random().nextInt(100 + 1);
-		if (num<=this.probabilidade) {//chance de 30% de criar corona
+		if (num<=this.probabilidade) {//chance de criar corona
 			this.create_corona();
 		}	
 }
