@@ -138,6 +138,7 @@ Aprendemos muito durante o desenvolvimento do projeto, e isso trouxe consigo in�
 * Melhorar o método de movimentação das peças geradoras, uma vez que agora elas simplesmente se movem aleatóriamente e as vezes não geram um desafio
 * Deixar o menu inicial de seleção mais bonito, algo que ficamos sem tempo de fazer e optamos por sua funcionalidade
 * Adicionar possíveis buffs para o jogador coletar pelo mapa, como por exemplo alcool em gel que daría um escudo para o jogador.
+* Aplicar de fato Design Patterns mais bem definidos, uma vez que nós já tinhamos programado grande parte do jogo quando a aula disso foi lançada, não tivemos a chance de aplicar mais eficazmente esses conceitos
 	
 	
 
