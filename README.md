@@ -71,15 +71,12 @@ public void algoInteressante(…) {
 
 # Documentação dos Componentes
 
-O vídeo a seguir apresenta um detalhamento de um projeto baseado em componentes:
-
-[![Projeto baseado em Componentes](http://img.youtube.com/vi/1LcSghlin6o/0.jpg)](https://youtu.be/1LcSghlin6o)
-
 # Diagramas
 
 ## Diagrama Geral do Projeto
 
-> <Apresente um diagrama geral de organização da organização do seu sistema. O formato é livre. A escolha de um ou mais estilos arquiteturais será considerado um diferencial.>
+![Diagrama Geral](./assets/DiagramaGeral.png)
+
 
 > <Faça uma breve descrição do diagrama.>
 
@@ -130,6 +127,128 @@ Interface agregadora do componente em Java:
 public interface IDataSet extends ITableProducer, IDataSetProperties {
 }
 ~~~
+
+# Componente Tabuleiro
+
+![Componente](Jogador.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FJogador.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Tabuleiro`
+Autores | Vitor e Guilherme
+Objetivo | Gerir as peças e seus movimentos
+Interface | -
+
+
+# Componente Usuario
+
+![Componente](Jogador.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FJogador.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Usuario`
+Autores | Vitor e Guilherme
+Objetivo | Representar o Jogador
+Interface | IPeca
+
+# Componente Vacina
+
+![Componente](Vacina.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FVacina.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Vacina`
+Autores | Vitor e Guilherme
+Objetivo | Representar a Vacina
+Interface | IPeca
+
+# Componente Corona
+
+![Componente](Covid.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FCovid.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Corona`
+Autores | Vitor e Guilherme
+Objetivo | Representar o Corona
+Interface | IPeca
+
+# Componente Doente
+
+![Componente](Doente.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FDoente.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Doente`
+Autores | Vitor e Guilherme
+Objetivo | Representar o Doente
+Interface | IPeca
+
+# Componente Atividade
+
+![Componente](Atividade.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FAtividade.PNG)
+
+Campo | Valor
+----- | -----
+Classe | `Game_project.src.game.Atividade`
+Autores | Vitor e Guilherme
+Objetivo | Representar a Atividade
+Interface | IPeca
+
+# Componente Unicamp
+
+![Componente](Unicamp.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FUnicamp.PNG)
+
+Campo | Valor
+----- | -----
+Classe |`Game_project.src.game.Unicamp`
+Autores | Vitor e Guilherme
+Objetivo | Representar a Unicamp
+Interface | IPeca
+
+
 
 ## Detalhamento das Interfaces
 
