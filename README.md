@@ -66,10 +66,10 @@ Qualquer mídia usada no seu projeto: vídeo, imagens, animações, slides etc. 
 
 
 ## Vídeo da Prévia
-[![Video explicativo sobre o projeto](https://img.youtube.com/vi/https://youtu.be/el5MtHRGmbc/0.jpg)](https://youtu.be/el5MtHRGmbc)
+[![Video explicativo sobre o projeto](http://i3.ytimg.com/vi/el5MtHRGmbc/hqdefault.jpg)](https://youtu.be/el5MtHRGmbc)
 
 ## Vídeo do Jogo
-> <Coloque um link para o vídeo em que é demonstrada a versão final do jogo. Esse vídeo deve ter em torno de 5 minutos. Este vídeo não apresenta slides, nem substitui a apresentação final do projeto, que será feita por conferência. Ele mostra apenas o jogo em funcionamento.>
+[![Video de gameplay do projeto](http://i3.ytimg.com/vi/YlAJYeICPFY/hqdefault.jpg)](https://youtu.be/YlAJYeICPFY)
 
 # Slides do Projeto
 
