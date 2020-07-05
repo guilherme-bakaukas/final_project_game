@@ -1,17 +1,21 @@
 # Projeto EaD Corona Run
 
-![Banner Apresentacao](Banner.png)
+![Banner Apresentacao](./assets/Banner.png)
 
 # Equipe
 * Vitor Rodrigues Pietrobom - 245584
 * Guilherme Tezoli Bakaukas - 217332
 
 # Descrição Resumida do Projeto
-O projeto consiste num jogo feito em espaco celular baseado em turnos.
+O projeto consiste num jogo feito em espaco celular que foi baseado no período atual de pandemia e EaD.
 
-O jogo tem como personagens um jogador e dois antagonistas, a Unicamp e um doente, sendo que a primeira solta atividades e o segundo solta corona virus.
+O jogo tem como personagens um jogador, o qual pode selecionar seu visual baseado nos criadores do jogo (tendo como opção jogar como Vitor ou como Guilherme) e dois antagonistas, a Unicamp e o Contaminado com Covid-19, sendo que a primeira tem a chance de soltar atividades e o segundo chance de soltar porções do virus.
 
-A cada turno o jogador pode realizar um movimento e os antagonistas e personagens se movem,
+Explicando agora mais sobre os Debuffs, neste jogo existem dois: Atividades e Vírus. As atividades tem como efeito deixar o jogador inabilitado de realizar movimentos por uma certa quantidade de tempo, já que este tem de concluir a tarefa. Já o vírus é mais extremo, caso o jogador colída com ele o esta morrerá instantaneamente, gerando o Game Over. os dois debuffs só se movem na direção na qual foram gerados e em apenas um sentido, caso colidam com uma parede apenas desaparecem.
+
+O objetivo do jogador no jogo é coletar as vacinas que apareceram aleatóriamente no tabuleiro, ganhando assim um ponto para cada coletada.
+
+Existem quatro dificuldades dentro do jogo: Fácil, Médio, Difícil e Insano. As dificuldades alteram dois parametros: velocidade do jogo e chance de geração de Debuffs.
 
 # Vídeo do Projeto
 [![Video explicativo sobre o projeto](https://img.youtube.com/vi/https://youtu.be/el5MtHRGmbc/0.jpg)](https://youtu.be/el5MtHRGmbc)
