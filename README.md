@@ -174,21 +174,98 @@ public void move() {
 ~~~
 
 # Destaques de Pattern
-`<Destaque de patterns adotados pela equipe. Sugestão de estrutura:>`
 
 ## Diagrama do Pattern
-`<Diagrama do pattern dentro do contexto da aplicação.>`
+![Pattern geradoras](./assets/Patterns/PatternGeradoras.png)
+
+As classes que herdam a abstrata do diagrama adicionam apenas dois métodos novos, um para verificar se novas peças já foram geradas, e outro para de fato gerar a peça.
 
 ## Código do Pattern
 ~~~java
-// Recorte do código do pattern seguindo as mesmas diretrizes de outros destaques
-public void algoInteressante(…) {
-   …
-   trechoInteressante = 100;
+public abstract class PecasGeradoras extends Peca {
+	
+	...
+	
+	public void verifica_movimento(int[] vetor) throws MovimentoInvalido {
+		...
+	}
+	
+	public void move() {//retorna o vetor de posições {linha,coluna} para movimentação
+		...
+	}
+	
+	public int[] create_position() {//retorna a posição da peça criada
+		...
+	}
+}
+
+
+~~~
+~~~java
+public class Unicamp extends PecasGeradoras {
+	...
+	private void verifica_atividade() {
+		...
+	}
+
+	private void create_atividade() {
+		...
+	}
+}
+~~~
+~~~java
+public class Doente extends PecasGeradoras {
+	...
+	private void verifica_corona() {
+		...
+	}
+
+	private void create_corona() {
+		...
+	}
+}
+
+~~~
+
+Utilizando este pattern, além da vantagem organizacional, vem uma praticidade na adoçao de novas peças geradoras e da ligação com sua respectiva peça gerada, uma vez que basta adicionar duas funcões simples que a peça já estaria pronta para a implementação.
+
+## Diagrama do Pattern
+![Pattern geradas](./assets/Patterns/PatternGeradas.png)
+
+As classes que herdam a abstrata do diagrama não adicionam nenhum novo método, apenas alteram e definem as já existentes, como por exemplo o método ''colisao_jogador()'', no qual cada classe que herda implementa sua própria interação
+
+## Código do Pattern
+~~~java
+public abstract class PecasGeradas extends Peca {
+	...
+	public void move() {//retorna o vetor de posições {linha,coluna} para movimentação
+		...
+	}
+	public abstract void colisao_jogador(int[] vetor);
+
 }
 ~~~
 
-> <Explicação de como o pattern foi adotado e quais suas vantagens, referenciando o diagrama.>
+~~~java
+public class Corona extends PecasGeradas {
+	public void colisao_jogador(int[] vetor) {
+		tabuleiro[this.linha][this.coluna]=null;//peça some
+		tab.die();//usuario morre
+	}
+}
+~~~
+
+~~~java
+public class Atividade extends PecasGeradas {
+	public void colisao_jogador(int[] vetor) {
+		tabuleiro[vetor[0]][vetor[1]].setmoved(true);//usuario afetado pela atividade
+		tabuleiro[this.linha][this.coluna]=null;//peça some
+	}
+}
+
+~~~
+
+Utilizando este pattern, além da vantagem organizacional, temos a vantagem de que para adicionar uma nova peça gerada basta implementar a classe abstrata e alterar poucos parametros para já ter um Buff ou Debuff funcional
 
 # Conclusões e Trabalhos Futuros
 
