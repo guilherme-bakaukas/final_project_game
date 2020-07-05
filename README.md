@@ -229,13 +229,10 @@ Método | Objetivo
 # Plano de Exceções
 
 ## Diagrama da hierarquia de exceções
-`<Elabore um diagrama com a hierarquia de exceções como detalhado abaixo>`
 
-![Hierarquia Exceções](exception-hierarchy.png)
+![Hierarquia Exceções](./assets/HierarquiaExcessoes.png)
 
 ## Descrição das classes de exceção
-
-`<Monte uma tabela descritiva seguindo o exemplo>:`
 
 
 Classe | Descrição
