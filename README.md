@@ -34,6 +34,8 @@ https://docs.google.com/presentation/d/1oAty8V_aL1AnFBKm4JpLDEH-U4iHk4urpDeWfbsR
 
 ## Relatório de Evolução
 
+* Depois de apresentar o projeto para o professor, PEDs e PADs, percebemos que haviamos cometido um grande erro quanto a passar o tabuleiro como parametro sempre, algo que corrigimos e agora cada componente guarda a referência para o tabuleiro
+
 * Depois de algumas iterações sobre o projeto percebemos que um jogo baseado em turnos não faria sentido, portanto, optamos por fazer um jogo mais fluido, na qual as peças se movimentam sem ordem fixa definida entre jogador e personagens.
 
 * Tinhamos cogitado a possibilidade de que quando um jogador colidisse com o corona, este teria uma chance de sobreviver, chance esta que também seria afetada pela quantidade de vacinas coletadas, mas acabamos abandonando a ideia pois chegamos a conclusão de que deixaria o jogo mais fácil e imprevisível.
