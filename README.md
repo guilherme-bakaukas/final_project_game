@@ -69,6 +69,8 @@ public void move() {
 
 ![meme caixao](./assets/caixao_meme.gif)
 
+* Tivemos bastante dificuldade com a formatação da interface gráfica, algo que resultou em algumas simplificações nela
+
 * Após algumas divergências sobre o quão difícil deveria ser o jogo, acabamos por criar quatro dificuldades para o jogo, as quais foram facilmente implementadas pela simplicidade dos parametros:
 ~~~java
 else if (e.getSource()==insane) {
@@ -203,6 +205,7 @@ Aprendemos muito durante o desenvolvimento do projeto, e isso trouxe consigo in�
 * Deixar o menu inicial de seleção mais bonito, algo que ficamos sem tempo de fazer e optamos por sua funcionalidade
 * Adicionar possíveis buffs para o jogador coletar pelo mapa, como por exemplo alcool em gel que daría um escudo para o jogador.
 * Aplicar de fato Design Patterns mais bem definidos, uma vez que nós já tinhamos programado grande parte do jogo quando a aula disso foi lançada, não tivemos a chance de aplicar mais eficazmente esses conceitos
+* Melhorar a interface gráfica como um todo, tivemos pouco tempo pra de fato explora-la e temos certeza que é possível fazer algo muito mais lápidado e bonito
 	
 	
 
