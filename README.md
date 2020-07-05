@@ -36,15 +36,31 @@ Existem quatro dificuldades dentro do jogo: Fácil, Médio, Difícil e Insano. A
 
 > <Relatório de evolução, descrevendo as evoluções do design do projeto, dificuldades enfrentadas, mudanças de rumo, melhorias e lições aprendidas. Referências aos diagramas e recortes de mudanças são bem-vindos.>
 
-Logo quando partimos para a reta final do projeto percebemos que um jogo baseado em turnos não faria sentido, portanto, optamos por fazer um jogo mais fluido, na qual as peças se movimentam sem ordem fixa definida entre jogador e personagens.
+* Depois de algumas iterações sobre o projeto percebemos que um jogo baseado em turnos não faria sentido, portanto, optamos por fazer um jogo mais fluido, na qual as peças se movimentam sem ordem fixa definida entre jogador e personagens.
 
-Alteramos todas as artes do jogo para artes originais e que seguissem um estilo pixelado, criando uma uniformidade entre o jogo inteiro.
+* Tinhamos cogitado a possibilidade de que quando um jogador colidisse com o corona, este teria uma chance de sobreviver, chance esta que também seria afetada pela quantidade de vacinas coletadas, mas acabamos abandonando a ideia pois chegamos a conclusão de que deixaria o jogo mais fácil e imprevisível.
 
-Decidimos criar a possibilidade do jogador escolher seu personagem, tendo como opções os membros do grupo.
+* Na primeira versão do jogo, as peças geradoras podiam gerar uma peça e andar ao mesmo tempo, o que ficava confuso e feio visualmente, então alteramos para que uma peça ande e depois verifique se pode gerar outra, mas nunca os dois ao mesmo tempo.
+~~~java
+public void move() {	
+	if(this.moved==false) {
+		super.move();
+	}
+	else { //caso ja tenha movido ele deve verificar a geração de atividades
+		this.verifica_atividade();
+	}	
+}
+~~~
 
-Adicionamos uma tela inicial contendo regras do jogo, seguida por uma tela de seleção de personagem.
+* 
 
-Após algumas divergências sobre o quão difícil deveria ser o jogo, acabamos por criar quatro dificuldades para o jogo, as quais foram facilmente implementadas pela simplicidade dos parametros:
+* Alteramos todas as artes do jogo para artes originais e que seguissem um estilo pixelado, criando uma uniformidade entre o jogo inteiro.
+
+* Decidimos criar a possibilidade do jogador escolher seu personagem, tendo como opções os membros do grupo.
+
+* Adicionamos uma tela inicial contendo regras do jogo, seguida por uma tela de seleção de personagem.
+
+* Após algumas divergências sobre o quão difícil deveria ser o jogo, acabamos por criar quatro dificuldades para o jogo, as quais foram facilmente implementadas pela simplicidade dos parametros:
 ~~~java
 else if (e.getSource()==insane) {
 	this.seconds=100; //segundos do timer (100ms para cada rodada do tabuleiro)
@@ -52,7 +68,7 @@ else if (e.getSource()==insane) {
 	dificuldade_defined=true;
 }
 ~~~
-Decidimos tambem por alterar as cores dos botões quando selecionados para facilitar o entendimento, algo que so custou duas linhas de codigo em cada dificuldade:
+* Decidimos tambem por alterar as cores dos botões quando selecionados para facilitar o entendimento, algo que so custou duas linhas de codigo em cada dificuldade:
 ~~~java
 else if (e.getSource()==insane) {
 	setcolors_dificuldade();//reseta os botões para cinza
@@ -62,6 +78,10 @@ else if (e.getSource()==insane) {
 	dificuldade_defined=true;
 }
 ~~~
+
+* Adicionamos uma nova arte para quando o jogador está afetado pela atividade, uma vez que antes não era possível saber quando o debuff tinha se encerrado.
+
+
 
 # Destaques de Código
 
