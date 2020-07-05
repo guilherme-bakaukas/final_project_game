@@ -80,7 +80,6 @@ public class Usuario extends Peca implements ActionListener {
 				}
 			}
 			
-			//FALTA VERIFICAR COLISÕES
 			tab.layout_tabuleiro();
 			tab.atualizar_tabuleiro();
 		}

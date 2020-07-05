@@ -34,7 +34,7 @@ public class Unicamp extends PecasGeradoras {
 		if(this.moved==false) {
 			super.move();
 		}
-		else {//caso ja tenha movido ele deve verificar a geração de atividades
+		else { //caso ja tenha movido ele deve verificar a geração de atividades
 			this.verifica_atividade();
 		}
 		
