@@ -71,10 +71,6 @@ public void algoInteressante(…) {
 
 # Documentação dos Componentes
 
-O vídeo a seguir apresenta um detalhamento de um projeto baseado em componentes:
-
-[![Projeto baseado em Componentes](http://img.youtube.com/vi/1LcSghlin6o/0.jpg)](https://youtu.be/1LcSghlin6o)
-
 # Diagramas
 
 ## Diagrama Geral do Projeto
@@ -131,6 +127,110 @@ Interface agregadora do componente em Java:
 public interface IDataSet extends ITableProducer, IDataSetProperties {
 }
 ~~~
+
+# Componente Jogador
+
+![Componente](Jogador.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FJogador.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar o Jogador
+Interface | IPeca
+
+# Componente Vacina
+
+![Componente](Vacina.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FVacina.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar a Vacina
+Interface | IPeca
+
+# Componente Corona
+
+![Componente](Covid.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FCovid.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar o Corona
+Interface | IPeca
+
+# Componente Doente
+
+![Componente](Doente.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FDoente.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar o Doente
+Interface | IPeca
+
+# Componente Atividade
+
+![Componente](Atividade.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FAtividade.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar a Atividade
+Interface | IPeca
+
+# Componente Unicamp
+
+![Componente](Unicamp.PNG)
+
+## Interfaces
+
+Interfaces associadas a esse componente:
+
+![Diagrama Interfaces](FUnicamp.PNG)
+
+Campo | Valor
+----- | -----
+Classe | Ainda nao criada
+Autores | Vitor e Guilherme
+Objetivo | Representar a Unicamp
+Interface | IPeca
+
+
 
 ## Detalhamento das Interfaces
 
