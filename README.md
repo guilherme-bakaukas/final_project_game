@@ -219,7 +219,7 @@ Todas as peças no jogo implementam a interface IPeca. A classe Vacina implement
 
 ## Diagrama Geral de Componentes
 
-
+![Diagrama Geral de componentes](./assets/IntComps/DiagramaGeralComps.png)
 
 # Componente Tabuleiro
 
