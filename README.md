@@ -56,7 +56,10 @@ public void move() {
 
 * Alteramos todas as artes do jogo para artes originais e que seguissem um estilo pixelado, criando uma uniformidade entre o jogo inteiro.
 
+![Unicamp pixelart](./assets/Unicamp.PNG)
+
 * Decidimos criar a possibilidade do jogador escolher seu personagem, tendo como opções os membros do grupo.
+![Player Vitor](./assets/VitorRaw.png) ![Player Gui](./assets/GuiRaw.png)
 
 * Adicionamos uma tela inicial contendo regras do jogo, seguida por uma tela de seleção de personagem.
 
@@ -80,6 +83,8 @@ else if (e.getSource()==insane) {
 ~~~
 
 * Adicionamos uma nova arte para quando o jogador está afetado pela atividade, uma vez que antes não era possível saber quando o debuff tinha se encerrado.
+
+![Player Atividade](./assets/VitorAtividade.png) ![Player Atividade](./assets/GuiAtividade.png)
 
 
 
