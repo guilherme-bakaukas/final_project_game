@@ -264,8 +264,10 @@ Método | Objetivo
 
 `<Monte uma tabela descritiva seguindo o exemplo>:`
 
+
 Classe | Descrição
 ----- | -----
-DivisaoInvalida | Engloba todas as exceções de divisões não aceitas.
-DivisaoInutil | Indica que a divisão por 1 é inútil.
-DivisaoNaoInteira | Indica uma divisão não inteira.
+MovimentoInvalido | Engloba todos os movimentos invalidos
+ColisaoInvalida | Engloba todas as colisões invalidas
+ColisaoJogador | Indica colisão inválida do jogador com um personagem.
+ColisaoPersonagens | Indica colisao invalida da Unicamp e do Doente com outras instâncias.
