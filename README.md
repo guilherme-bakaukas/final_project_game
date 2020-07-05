@@ -63,6 +63,12 @@ public void move() {
 
 * Adicionamos uma tela inicial contendo regras do jogo, seguida por uma tela de seleção de personagem.
 
+![instrucoes](./assets/Instrucoes.png)
+
+* Adicionamos uma tela final que permite tentar novamente, sendo que esta tem o gif do meme do caixão, algo que esteve muito em moda neste momento do mundo e combinava com o jogo:
+
+![meme caixao](./assets/caixao_meme.gif)
+
 * Após algumas divergências sobre o quão difícil deveria ser o jogo, acabamos por criar quatro dificuldades para o jogo, as quais foram facilmente implementadas pela simplicidade dos parametros:
 ~~~java
 else if (e.getSource()==insane) {
@@ -85,6 +91,7 @@ else if (e.getSource()==insane) {
 * Adicionamos uma nova arte para quando o jogador está afetado pela atividade, uma vez que antes não era possível saber quando o debuff tinha se encerrado.
 
 ![Player Atividade](./assets/VitorAtividade.png) ![Player Atividade](./assets/GuiAtividade.png)
+
 
 
 
