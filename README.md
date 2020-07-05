@@ -140,7 +140,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Tabuleiro`
+Classe | `Game_project.src.game.Tabuleiro`
 Autores | Vitor e Guilherme
 Objetivo | Gerir as peças e seus movimentos
 Interface | -
@@ -158,7 +158,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Usuario`
+Classe | `Game_project.src.game.Usuario`
 Autores | Vitor e Guilherme
 Objetivo | Representar o Jogador
 Interface | IPeca
@@ -175,7 +175,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Vacina`
+Classe | `Game_project.src.game.Vacina`
 Autores | Vitor e Guilherme
 Objetivo | Representar a Vacina
 Interface | IPeca
@@ -192,7 +192,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Corona`
+Classe | `Game_project.src.game.Corona`
 Autores | Vitor e Guilherme
 Objetivo | Representar o Corona
 Interface | IPeca
@@ -209,7 +209,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Doente`
+Classe | `Game_project.src.game.Doente`
 Autores | Vitor e Guilherme
 Objetivo | Representar o Doente
 Interface | IPeca
@@ -226,7 +226,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe | `Game_project.src.Atividade`
+Classe | `Game_project.src.game.Atividade`
 Autores | Vitor e Guilherme
 Objetivo | Representar a Atividade
 Interface | IPeca
@@ -243,7 +243,7 @@ Interfaces associadas a esse componente:
 
 Campo | Valor
 ----- | -----
-Classe |`Game_project.src.Unicamp`
+Classe |`Game_project.src.game.Unicamp`
 Autores | Vitor e Guilherme
 Objetivo | Representar a Unicamp
 Interface | IPeca
