@@ -1,3 +1,4 @@
+package game;
 public class SairTabuleiro extends MovimentoInvalido {
    public SairTabuleiro() {
       super();

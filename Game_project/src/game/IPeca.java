@@ -1,3 +1,4 @@
+package game;
 
 public interface IPeca {//interface criada para organizar as peças e suas localizações
 	

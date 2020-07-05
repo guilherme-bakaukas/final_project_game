@@ -1,3 +1,4 @@
+package game;
 public class ColisaoInvalida extends MovimentoInvalido {
    public ColisaoInvalida() {
       super();

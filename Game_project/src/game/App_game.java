@@ -1,7 +1,8 @@
+package game;
 
 public class App_game {
 	
-	public static String DIRETORIO= App_game.class.getResource(".").getPath() + "assets/";
+	public static String DIRETORIO= App_game.class.getResource("..").getPath() + "assets/";
 
 	public static void main(String[] args) {
 		Janela janela=new Janela();

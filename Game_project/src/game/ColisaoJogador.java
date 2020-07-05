@@ -1,3 +1,4 @@
+package game;
 public class ColisaoJogador extends ColisaoInvalida {
    public ColisaoJogador() {
       super();
